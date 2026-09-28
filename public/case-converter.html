@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Case Converter — Free Online Text Case Changer | Tools</title>
+  <meta name="description" content="Free case converter. Change text to UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, CONSTANT_CASE and more. All 13 cases shown at once." />
+  <meta name="keywords" content="case converter, uppercase converter, lowercase converter, title case converter, sentence case converter, camelCase converter, snake_case, kebab-case, text case changer" />
+  <link rel="canonical" href="https://tools.land.me.uk/case-converter" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tools — Free Online Calculators" />
+  <meta property="og:url" content="https://tools.land.me.uk/case-converter" />
+  <meta property="og:title" content="Case Converter — All 13 Cases at Once" />
+  <meta property="og:description" content="Convert text to any case style in one click. UPPERCASE, title, camelCase, snake_case and more." />
+  <meta property="og:image" content="https://tools.land.me.uk/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication",
+        "name": "Case Converter",
+        "url": "https://tools.land.me.uk/case-converter",
+        "description": "Free online case converter. Convert text to UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, CONSTANT_CASE and more.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+      { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Tools", "item": "https://tools.land.me.uk/" },
+        { "@type": "ListItem", "position": 2, "name": "Case Converter", "item": "https://tools.land.me.uk/case-converter" }
+      ]},
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "What is Title Case?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Title Case capitalises the first letter of each word. This converter uses a simple rule: every whitespace-separated word gets its first letter upper-cased and the rest lower-cased." } },
+        { "@type": "Question", "name": "What is Sentence case?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sentence case lowercases everything, then capitalises the first letter of each sentence. The first letter of the whole text is also capitalised." } },
+        { "@type": "Question", "name": "What is camelCase?",
+          "acceptedAnswer": { "@type": "Answer", "text": "camelCase joins words together with no separator. The first word is lowercase, the rest have their first letter uppercase. Example: helloWorldExample." } },
+        { "@type": "Question", "name": "What is snake_case?",
+          "acceptedAnswer": { "@type": "Answer", "text": "snake_case replaces spaces with underscores and lowercases everything. Example: hello_world_example. Commonly used for variable names in Python, Ruby and SQL." } },
+        { "@type": "Question", "name": "What is kebab-case?",
+          "acceptedAnswer": { "@type": "Answer", "text": "kebab-case replaces spaces with hyphens and lowercases everything. Example: hello-world-example. Commonly used for CSS classes and URL slugs." } },
+        { "@type": "Question", "name": "What is CONSTANT_CASE?",
+          "acceptedAnswer": { "@type": "Answer", "text": "CONSTANT_CASE is all uppercase with words joined by underscores. Example: HELLO_WORLD_EXAMPLE. Commonly used for constants in most programming languages." } },
+        { "@type": "Question", "name": "Does the tool handle punctuation?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Punctuation is preserved in UPPERCASE, lowercase, Title Case and Sentence case. It is stripped in camelCase, snake_case, kebab-case, CONSTANT_CASE and dot.case, which are designed for code identifiers." } },
+        { "@type": "Question", "name": "Is my text stored anywhere?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs in your browser. Your text is never uploaded or logged." } }
+      ]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo"><span class="logo-mark"><i class="fas fa-calculator"></i></span><span class="logo-text">Tools<em>.land</em></span></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions"><a href="/#calculators" class="btn-nav-primary"><i class="fas fa-arrow-left"></i>&nbsp;All Calculators</a></div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span><span class="current">Case Converter</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge"><i class="fas fa-font"></i> 13 case styles · All at once</div>
+      <h1>Case <em>Converter</em></h1>
+      <p>
+        Paste or type text, and every case style is generated at once —
+        UPPERCASE, Title Case, camelCase, snake_case, kebab-case and more.
+        Click any row to copy.
+      </p>
+    </section>
+
+    <!-- ══════════════ CONVERTER ══════════════ -->
+    <section class="tool-wrap tool-wrap--wide">
+      <div class="tool-card tool-card--flagship" data-tool="case">
+
+        <!-- Textarea -->
+        <label class="tool-field">
+          <span class="tool-field__label">Your text</span>
+          <span class="tool-field__inputwrap">
+            <textarea
+              id="ccText"
+              class="wc-textarea"
+              rows="6"
+              placeholder="Paste or type text here…"
+              spellcheck="false"
+            ></textarea>
+          </span>
+        </label>
+
+        <!-- Actions -->
+        <div class="tool-actions tool-actions--rich" style="margin-top: var(--sp-3);">
+          <button class="tool-btn tool-btn--primary" data-action="copy-all" type="button">
+            <i class="fas fa-copy"></i><span>Copy all cases</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="paste" type="button">
+            <i class="fas fa-paste"></i><span>Paste</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="sample" type="button">
+            <i class="fas fa-wand-magic-sparkles"></i><span>Sample text</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost tool-btn--danger" data-action="clear" type="button">
+            <i class="fas fa-rotate-left"></i><span>Clear</span>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="wc-empty" data-cc-empty>
+          <i class="fas fa-font"></i>
+          <p>Start typing or paste text — every case style appears below.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="cc-stats hidden" data-cc-stats>
+          <div class="cc-stat" data-cc-stat="words">
+            <span class="cc-stat__label">Words</span>
+            <span class="cc-stat__value" data-cc-value>0</span>
+          </div>
+          <div class="cc-stat" data-cc-stat="chars">
+            <span class="cc-stat__label">Characters</span>
+            <span class="cc-stat__value" data-cc-value>0</span>
+          </div>
+          <div class="cc-stat" data-cc-stat="charsNoSpace">
+            <span class="cc-stat__label">No spaces</span>
+            <span class="cc-stat__value" data-cc-value>0</span>
+          </div>
+        </div>
+
+        <!-- All cases table -->
+        <div class="cc-table hidden" data-cc-table>
+          <div class="cc-table__head">
+            <span><i class="fas fa-list"></i> All case styles</span>
+          </div>
+          <table class="cc-table__table">
+            <tbody data-cc-table-body></tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ HOW IT WORKS ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">How It Works</span>
+        <h2 class="content-title">Case Styles <em>Explained</em></h2>
+      </header>
+      <div class="prose">
+        <h3>UPPERCASE and lowercase</h3>
+        <p>The simplest conversions. UPPERCASE turns every letter capital; lowercase turns every letter lower. Everything else — punctuation, numbers, spaces — stays the same.</p>
+        <p><code>Hello World</code> → <code>HELLO WORLD</code> → <code>hello world</code></p>
+
+        <h3>Title Case</h3>
+        <p>Each word gets its first letter capitalised and the rest lowercased. This converter uses a straightforward rule — every whitespace-separated word is treated the same way, without special handling for small words like "of" or "the".</p>
+        <p><code>the lord of the rings</code> → <code>The Lord Of The Rings</code></p>
+
+        <h3>Sentence case</h3>
+        <p>Everything is lowercased first, then the first letter of each sentence is capitalised. A sentence ends at <code>.</code>, <code>!</code> or <code>?</code>.</p>
+        <p><code>HELLO WORLD. HOW ARE YOU?</code> → <code>Hello world. How are you?</code></p>
+
+        <h3>camelCase</h3>
+        <p>Words are joined with no separator. The first word is lowercase; every following word begins with a capital. Commonly used for variable names in JavaScript, Java and Swift.</p>
+        <p><code>hello world example</code> → <code>helloWorldExample</code></p>
+
+        <h3>PascalCase</h3>
+        <p>Like camelCase, but the first word is also capitalised. Commonly used for class names and React components.</p>
+        <p><code>hello world example</code> → <code>HelloWorldExample</code></p>
+
+        <h3>snake_case</h3>
+        <p>Words are lowercased and joined with underscores. The convention in Python, Ruby and SQL.</p>
+        <p><code>Hello World Example</code> → <code>hello_world_example</code></p>
+
+        <h3>kebab-case</h3>
+        <p>Words are lowercased and joined with hyphens. Commonly used for CSS class names, HTML attributes and URL slugs.</p>
+        <p><code>Hello World Example</code> → <code>hello-world-example</code></p>
+
+        <h3>CONSTANT_CASE</h3>
+        <p>All uppercase, joined with underscores. Used for constants in most programming languages.</p>
+        <p><code>max retry count</code> → <code>MAX_RETRY_COUNT</code></p>
+
+        <h3>dot.case</h3>
+        <p>Words lowercased and joined with dots. Sometimes used for namespaced config keys or nested object paths.</p>
+        <p><code>user profile name</code> → <code>user.profile.name</code></p>
+
+        <h3>aLtErNaTiNg cAsE</h3>
+        <p>Letters alternate between lower and upper. The original spacing and punctuation are preserved. Used to convey sarcasm or emphasis in informal writing.</p>
+        <p><code>hello world</code> → <code>hElLo WoRlD</code></p>
+
+        <h3>iNVERSE cASE</h3>
+        <p>Every letter swaps its case. Uppercase becomes lowercase and vice versa. Everything else is preserved.</p>
+        <p><code>Hello World</code> → <code>hELLO wORLD</code></p>
+
+        <h3>Reverse</h3>
+        <p>All characters are reversed. Useful for puzzles, obfuscation, or quick text transforms.</p>
+        <p><code>hello</code> → <code>olleh</code></p>
+      </div>
+    </section>
+
+    <!-- ══════════════ EXAMPLES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Reference</span>
+        <h2 class="content-title">All Cases <em>Side by Side</em></h2>
+      </header>
+
+      <div class="tool-examples">
+        <table class="tool-examples__table">
+          <thead><tr><th>Style</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>UPPERCASE</td><td><strong>HELLO WORLD EXAMPLE</strong></td></tr>
+            <tr><td>lowercase</td><td><strong>hello world example</strong></td></tr>
+            <tr><td>Title Case</td><td><strong>Hello World Example</strong></td></tr>
+            <tr><td>Sentence case</td><td><strong>Hello world example</strong></td></tr>
+            <tr><td>camelCase</td><td><strong>helloWorldExample</strong></td></tr>
+            <tr><td>PascalCase</td><td><strong>HelloWorldExample</strong></td></tr>
+            <tr><td>snake_case</td><td><strong>hello_world_example</strong></td></tr>
+            <tr><td>kebab-case</td><td><strong>hello-world-example</strong></td></tr>
+            <tr><td>CONSTANT_CASE</td><td><strong>HELLO_WORLD_EXAMPLE</strong></td></tr>
+            <tr><td>dot.case</td><td><strong>hello.world.example</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ USES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Everyday Uses</span>
+        <h2 class="content-title">When You'll <em>Need This</em></h2>
+      </header>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-code"></i></div>
+          <h3>Programming</h3>
+          <p>Convert between camelCase, snake_case and CONSTANT_CASE when switching languages or refactoring code.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-heading"></i></div>
+          <h3>Headlines &amp; titles</h3>
+          <p>Turn uppercase headlines into proper Title Case, or lowercase into Sentence case for articles.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon purple"><i class="fas fa-link"></i></div>
+          <h3>URL slugs</h3>
+          <p>Convert titles to kebab-case for clean, SEO-friendly URLs and file names.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-database"></i></div>
+          <h3>Database columns</h3>
+          <p>Convert between camelCase and snake_case to match your database's naming convention.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon red"><i class="fas fa-palette"></i></div>
+          <h3>CSS &amp; HTML</h3>
+          <p>Generate kebab-case class names, or dot.case for BEM-style structure.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-comment-dots"></i></div>
+          <h3>Social &amp; memes</h3>
+          <p>Generate aLtErNaTiNg cAsE for comedic effect, or iNVERSE for emphasis.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════ FAQ ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Questions</span>
+        <h2 class="content-title">Case <em>FAQ</em></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-row">
+          <summary>What is Title Case?</summary>
+          <div class="faq-row__answer"><p>Title Case capitalises the first letter of each word. This converter uses a simple rule: every whitespace-separated word gets its first letter upper-cased and the rest lower-cased. It does not apply the more complex rules some publishers use for small words like "of" or "the".</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is Sentence case?</summary>
+          <div class="faq-row__answer"><p>Sentence case lowercases everything, then capitalises the first letter of each sentence. A sentence ends at <code>.</code>, <code>!</code> or <code>?</code>. The very first letter of the text is always capitalised.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is camelCase?</summary>
+          <div class="faq-row__answer"><p>camelCase joins words together with no separator. The first word is lowercase, the rest have their first letter uppercase. Example: <code>helloWorldExample</code>. Common in JavaScript, Java and Swift.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is snake_case?</summary>
+          <div class="faq-row__answer"><p>snake_case replaces spaces with underscores and lowercases everything. Example: <code>hello_world_example</code>. Common in Python, Ruby and SQL.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is kebab-case?</summary>
+          <div class="faq-row__answer"><p>kebab-case replaces spaces with hyphens and lowercases everything. Example: <code>hello-world-example</code>. Common in CSS class names and URL slugs.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is CONSTANT_CASE?</summary>
+          <div class="faq-row__answer"><p>CONSTANT_CASE is all uppercase with words joined by underscores. Example: <code>HELLO_WORLD_EXAMPLE</code>. Common for constants in most programming languages.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Does the tool handle punctuation?</summary>
+          <div class="faq-row__answer"><p>Yes. Punctuation is preserved in UPPERCASE, lowercase, Title Case and Sentence case. It is stripped in camelCase, snake_case, kebab-case, CONSTANT_CASE and dot.case, which are designed for code identifiers where punctuation is not allowed.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is my text stored anywhere?</summary>
+          <div class="faq-row__answer"><p>No. Everything runs in your browser. Your text is never uploaded or logged.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ RELATED ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Related Tools</span>
+        <h2 class="content-title">You Might Also <em>Need</em></h2>
+      </header>
+
+      <div class="similar-grid">
+        <a href="/word-counter" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-pen-nib"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Word Counter</span>
+            <span class="similar-meta">Live stats and keywords</span>
+          </span>
+        </a>
+        <a href="/percentage-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-percent"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Percentage Calculator</span>
+            <span class="similar-meta">Six modes, live formula</span>
+          </span>
+        </a>
+        <a href="/unit-converter" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-ruler-combined"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Unit Converter</span>
+            <span class="similar-meta">Length, weight, temperature</span>
+          </span>
+        </a>
+        <a href="/" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calculator"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">All Calculators</span>
+            <span class="similar-meta">Back to hub</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <p class="last-updated">
+      <i class="fas fa-circle-check"></i>
+      Last updated: <time datetime="2026-01-01">1 January 2026</time>.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p>
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/legal.html">Privacy</a> ·
+      <a href="/legal.html">Terms</a> ·
+      <a href="https://land.me.uk/">Hub</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+  <script type="module" src="/js/calculator-page.js"></script>
+</body>
+</html>

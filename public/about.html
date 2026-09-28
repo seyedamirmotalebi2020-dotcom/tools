@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow" />
+  <title>About — Tools.land</title>
+  <meta name="description" content="About Tools.land — a small collection of free, fast, private calculators. No signup, no tracking, no clutter." />
+  <link rel="canonical" href="https://tools.land.me.uk/about.html" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo"><span class="logo-mark"><i class="fas fa-calculator"></i></span><span class="logo-text">Tools<em>.land</em></span></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions"><a href="/#calculators" class="btn-nav-primary"><i class="fas fa-arrow-left"></i>&nbsp;All Calculators</a></div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span><span class="current">About</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge"><i class="fas fa-calculator"></i> Small, fast, honest</div>
+      <h1>About <em>Tools.land</em></h1>
+      <p>A small collection of free calculators that do one thing each — and do it well.</p>
+    </section>
+
+    <section class="content-section">
+      <div class="prose">
+        <h3>What this is</h3>
+        <p>Tools.land is a set of free, fast, private calculators. Percentage, age, dates, tips, discounts, units, BMI, loans — the everyday things people search for and use once. No accounts, no tracking, no signup. Everything runs in your browser.</p>
+
+        <h3>Why it exists</h3>
+        <p>Most calculator sites are slow, cluttered, and buried under ads. This one is the opposite. Every page loads fast, every calculator explains the formula, and ads are limited to two non-intrusive slots per page — never above the calculator, never between your input and your result.</p>
+
+        <h3>How it is built</h3>
+        <p>One HTML file per calculator. Vanilla JavaScript, no framework. Static assets served by a small Node server. No database, no cookies for tracking, no third-party analytics that follow you around the web. Messages from the contact form are stored privately.</p>
+
+        <h3>Privacy</h3>
+        <p>Calculations never leave your device. We do not log your inputs. We do not know what you calculated. The only things we record are anonymous page views — how many people used each calculator — so we know what to build next.</p>
+
+        <h3>Accuracy</h3>
+        <p>Formulas are standard and verified against manual calculation. Health and financial calculators include disclaimers and are for guidance only. If you spot an error, please <a href="/contact.html">get in touch</a>.</p>
+
+        <h3>Part of the land.me.uk hub</h3>
+        <p>Tools.land is one project in a small family of sites — alongside Quiz Land and Earn Land. Each does one thing well. You can see them all at <a href="https://land.me.uk/">land.me.uk</a>.</p>
+      </div>
+    </section>
+
+    <p class="last-updated"><i class="fas fa-circle-check"></i> Last updated: <time datetime="2026-01-01">1 January 2026</time>.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p><a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/legal.html">Privacy</a> · <a href="/legal.html">Terms</a> · <a href="https://land.me.uk/">Hub</a></p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+</body>
+</html>

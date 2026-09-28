@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Unit Converter — Length, Weight, Temperature, Volume, Speed | Tools</title>
+  <meta name="description" content="Free unit converter for length, weight, temperature, volume and speed. Convert cm, inches, kg, pounds, Celsius, Fahrenheit and more — with a full conversion table." />
+  <meta name="keywords" content="unit converter, cm to inches, kg to pounds, celsius to fahrenheit, meters to feet, km to miles, unit conversion calculator" />
+  <link rel="canonical" href="https://tools.land.me.uk/unit-converter" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tools — Free Online Calculators" />
+  <meta property="og:url" content="https://tools.land.me.uk/unit-converter" />
+  <meta property="og:title" content="Unit Converter — Free, Instant, All Units at Once" />
+  <meta property="og:description" content="Convert length, weight, temperature, volume and speed. See your value in every unit at once." />
+  <meta property="og:image" content="https://tools.land.me.uk/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication",
+        "name": "Unit Converter",
+        "url": "https://tools.land.me.uk/unit-converter",
+        "description": "Free online unit converter for length, weight, temperature, volume and speed. Shows every unit at once.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+      { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Tools", "item": "https://tools.land.me.uk/" },
+        { "@type": "ListItem", "position": 2, "name": "Unit Converter", "item": "https://tools.land.me.uk/unit-converter" }
+      ]},
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "How many centimetres in an inch?",
+          "acceptedAnswer": { "@type": "Answer", "text": "There are exactly 2.54 centimetres in one inch." } },
+        { "@type": "Question", "name": "How many pounds in a kilogram?",
+          "acceptedAnswer": { "@type": "Answer", "text": "One kilogram equals approximately 2.20462 pounds." } },
+        { "@type": "Question", "name": "How do I convert Celsius to Fahrenheit?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Multiply by 9, divide by 5, then add 32. Formula: °F = (°C × 9/5) + 32." } },
+        { "@type": "Question", "name": "How many feet in a metre?",
+          "acceptedAnswer": { "@type": "Answer", "text": "One metre equals approximately 3.28084 feet." } },
+        { "@type": "Question", "name": "How many kilometres in a mile?",
+          "acceptedAnswer": { "@type": "Answer", "text": "One mile equals approximately 1.60934 kilometres." } },
+        { "@type": "Question", "name": "What is a stone?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A stone is a British unit of weight equal to 14 pounds, or approximately 6.35 kilograms." } }
+      ]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo"><span class="logo-mark"><i class="fas fa-calculator"></i></span><span class="logo-text">Tools<em>.land</em></span></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions"><a href="/#calculators" class="btn-nav-primary"><i class="fas fa-arrow-left"></i>&nbsp;All Calculators</a></div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span><span class="current">Unit Converter</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge"><i class="fas fa-ruler-combined"></i> 5 categories · All units at once</div>
+      <h1>Unit <em>Converter</em></h1>
+      <p>
+        Convert length, weight, temperature, volume and speed. Enter one value
+        and see it in every unit of the category at once.
+      </p>
+    </section>
+
+    <!-- ══════════════ CALCULATOR ══════════════ -->
+    <section class="tool-wrap">
+      <div class="tool-card tool-card--flagship" data-tool="unit">
+
+        <!-- Category -->
+        <label class="tool-field">
+          <span class="tool-field__label">Category</span>
+          <span class="tool-field__inputwrap">
+            <select id="unitCategory">
+              <option value="length">Length — mm, cm, m, km, inches, feet, miles</option>
+              <option value="weight">Weight — mg, g, kg, tonnes, ounces, pounds, stones</option>
+              <option value="temperature">Temperature — Celsius, Fahrenheit, Kelvin</option>
+              <option value="volume">Volume — ml, litres, cups, pints, gallons</option>
+              <option value="speed">Speed — m/s, km/h, mph, knots</option>
+            </select>
+          </span>
+        </label>
+
+        <!-- From / To -->
+        <div class="tool-inputs" style="margin-top: var(--sp-3);">
+          <label class="tool-field">
+            <span class="tool-field__label">From</span>
+            <span class="tool-field__inputwrap">
+              <select id="unitFrom"></select>
+            </span>
+          </label>
+          <label class="tool-field">
+            <span class="tool-field__label">To</span>
+            <span class="tool-field__inputwrap">
+              <select id="unitTo"></select>
+            </span>
+          </label>
+        </div>
+
+        <!-- Swap -->
+        <div class="tool-swap">
+          <button type="button" data-action="swap" aria-label="Swap units">
+            <i class="fas fa-right-left"></i>
+          </button>
+        </div>
+
+        <!-- Value -->
+        <label class="tool-field">
+          <span class="tool-field__label">Value</span>
+          <span class="tool-field__inputwrap">
+            <input type="number" inputmode="decimal" step="any" id="unitValue" placeholder="100" autocomplete="off" />
+          </span>
+        </label>
+
+        <!-- Result -->
+        <div class="tool-result tool-result--flagship" data-result aria-live="polite" style="margin-top: var(--sp-3);">
+          <span class="tool-result__label">Result</span>
+          <span class="tool-result__value" data-result-value>—</span>
+          <span class="tool-result__detail" data-result-detail></span>
+          <span class="tool-result__formula" data-result-formula></span>
+        </div>
+
+        <!-- Actions -->
+        <div class="tool-actions tool-actions--rich">
+          <button class="tool-btn tool-btn--primary" data-action="copy" type="button">
+            <i class="fas fa-copy"></i><span>Copy all conversions</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost tool-btn--danger" data-action="reset" type="button">
+            <i class="fas fa-rotate-left"></i><span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="wc-empty" data-unit-empty>
+          <i class="fas fa-ruler-combined"></i>
+          <p>Enter a value to see every conversion in the category.</p>
+        </div>
+
+        <!-- Full conversion table -->
+        <div class="unit-table hidden" data-unit-table>
+          <div class="unit-table__head">
+            <span><i class="fas fa-list"></i> All conversions</span>
+          </div>
+          <table class="unit-table__table">
+            <thead>
+              <tr>
+                <th>Unit</th>
+                <th>Value</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody data-unit-table-body></tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ HOW IT WORKS ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">How It Works</span>
+        <h2 class="content-title">Conversion <em>Logic</em></h2>
+      </header>
+      <div class="prose">
+        <h3>Multiplicative units</h3>
+        <p>Length, weight, volume and speed convert by multiplying the input by a fixed factor to reach the base unit, then dividing by another factor to reach the target unit. Every conversion in this calculator uses internationally standard factors.</p>
+
+        <h3>Temperature</h3>
+        <p>Temperature is different — it uses offsets, not just ratios. The formulas are:</p>
+        <p><code>°F = (°C × 9/5) + 32</code></p>
+        <p><code>°C = (°F − 32) × 5/9</code></p>
+        <p><code>K = °C + 273.15</code></p>
+
+        <h3>US vs metric units</h3>
+        <p>Units marked <strong>US</strong> in the conversion table are predominantly used in the United States. The others are metric or international. Both are exact — the US fluid ounce, cup, pint, quart and gallon differ from their British imperial counterparts, so this calculator uses the US standards for those units.</p>
+
+        <h3>Precision and rounding</h3>
+        <p>Conversions are shown to a sensible number of decimal places. Where a value would be unwieldy (extremely small or large), scientific notation is used. The underlying value keeps full precision in the calculation.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ EXAMPLES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Reference</span>
+        <h2 class="content-title">Common <em>Conversions</em></h2>
+      </header>
+
+      <div class="tool-examples">
+        <table class="tool-examples__table">
+          <thead><tr><th>From</th><th>To</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>1 inch</td><td>Centimetres</td><td><strong>2.54 cm</strong></td></tr>
+            <tr><td>1 foot</td><td>Centimetres</td><td><strong>30.48 cm</strong></td></tr>
+            <tr><td>1 metre</td><td>Feet</td><td><strong>3.28084 ft</strong></td></tr>
+            <tr><td>1 mile</td><td>Kilometres</td><td><strong>1.60934 km</strong></td></tr>
+            <tr><td>1 kilogram</td><td>Pounds</td><td><strong>2.20462 lb</strong></td></tr>
+            <tr><td>1 stone</td><td>Kilograms</td><td><strong>6.35029 kg</strong></td></tr>
+            <tr><td>0 °C</td><td>Fahrenheit</td><td><strong>32 °F</strong></td></tr>
+            <tr><td>100 °C</td><td>Fahrenheit</td><td><strong>212 °F</strong></td></tr>
+            <tr><td>37 °C</td><td>Fahrenheit</td><td><strong>98.6 °F</strong></td></tr>
+            <tr><td>1 litre</td><td>US gallons</td><td><strong>0.264172 gal</strong></td></tr>
+            <tr><td>1 mile per hour</td><td>Kilometres per hour</td><td><strong>1.60934 km/h</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ USES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Everyday Uses</span>
+        <h2 class="content-title">When You'll <em>Need This</em></h2>
+      </header>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-plane"></i></div>
+          <h3>Travel &amp; distances</h3>
+          <p>Converting kilometres to miles for road trips, or altitude in metres to feet for hiking.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-cake-candles"></i></div>
+          <h3>Cooking &amp; baking</h3>
+          <p>Converting cups to millilitres, ounces to grams, or Fahrenheit to Celsius for international recipes.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon purple"><i class="fas fa-dumbbell"></i></div>
+          <h3>Fitness &amp; weight</h3>
+          <p>Kilograms to pounds for gym equipment, or stone to kilograms for UK medical forms.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-flask"></i></div>
+          <h3>Science &amp; study</h3>
+          <p>Chemistry, physics and engineering homework — the standard unit conversions you need.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon red"><i class="fas fa-shipping-fast"></i></div>
+          <h3>Shipping &amp; logistics</h3>
+          <p>Package weights and dimensions in metric vs imperial for cross-border shipping.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-house"></i></div>
+          <h3>DIY &amp; home</h3>
+          <p>Furniture dimensions, fabric lengths, or any measurement in a different unit system.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════ FAQ ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Questions</span>
+        <h2 class="content-title">Unit <em>FAQ</em></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-row">
+          <summary>How many centimetres in an inch?</summary>
+          <div class="faq-row__answer"><p>There are exactly <strong>2.54 centimetres</strong> in one inch.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How many pounds in a kilogram?</summary>
+          <div class="faq-row__answer"><p>One kilogram equals approximately <strong>2.20462 pounds</strong>.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How do I convert Celsius to Fahrenheit?</summary>
+          <div class="faq-row__answer"><p>Multiply by 9, divide by 5, then add 32. Formula: <code>°F = (°C × 9/5) + 32</code>.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How many feet in a metre?</summary>
+          <div class="faq-row__answer"><p>One metre equals approximately <strong>3.28084 feet</strong>.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How many kilometres in a mile?</summary>
+          <div class="faq-row__answer"><p>One mile equals approximately <strong>1.60934 kilometres</strong>.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is a stone?</summary>
+          <div class="faq-row__answer"><p>A stone is a British unit of weight equal to <strong>14 pounds</strong>, or approximately <strong>6.35 kilograms</strong>. Still commonly used in the UK for body weight.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Are US and UK cups the same?</summary>
+          <div class="faq-row__answer"><p>No. A US cup is <strong>236.6 ml</strong>, while a UK cup is <strong>250 ml</strong>. This calculator uses the US standard.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Are the conversions exact?</summary>
+          <div class="faq-row__answer"><p>Yes. All conversions use internationally standard factors. Any difference you see will be due to rounding in the display, not in the calculation.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ RELATED ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Related Tools</span>
+        <h2 class="content-title">You Might Also <em>Need</em></h2>
+      </header>
+
+      <div class="similar-grid">
+        <a href="/bmi-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-heart-pulse"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">BMI Calculator</span>
+            <span class="similar-meta">Body mass index</span>
+          </span>
+        </a>
+        <a href="/percentage-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-percent"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Percentage Calculator</span>
+            <span class="similar-meta">Six modes, live formula</span>
+          </span>
+        </a>
+        <a href="/word-counter" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-pen-nib"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Word Counter</span>
+            <span class="similar-meta">Live stats and keywords</span>
+          </span>
+        </a>
+        <a href="/" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calculator"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">All Calculators</span>
+            <span class="similar-meta">Back to hub</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <p class="last-updated">
+      <i class="fas fa-circle-check"></i>
+      Last updated: <time datetime="2026-01-01">1 January 2026</time>.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p>
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/legal.html">Privacy</a> ·
+      <a href="/legal.html">Terms</a> ·
+      <a href="https://land.me.uk/">Hub</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+  <script type="module" src="/js/calculator-page.js"></script>
+</body>
+</html>

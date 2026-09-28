@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Percentage Calculator — Free Online Calculator With 6 Modes | Tools</title>
+  <meta name="description" content="Free percentage calculator with six modes: X% of Y, X is what % of Y, % change, increase, decrease and find the whole. Instant, private, no signup." />
+  <meta name="keywords" content="percentage calculator, percent calculator, x percent of y, percentage increase calculator, percentage decrease calculator, percentage change calculator, percent off calculator" />
+  <link rel="canonical" href="https://tools.land.me.uk/percentage-calculator" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tools — Free Online Calculators" />
+  <meta property="og:url" content="https://tools.land.me.uk/percentage-calculator" />
+  <meta property="og:title" content="Percentage Calculator — 6 Modes, Free, No Signup" />
+  <meta property="og:description" content="Find X% of Y, what percent X is of Y, percentage change, increase, decrease and reverse. Live formula and history." />
+  <meta property="og:image" content="https://tools.land.me.uk/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication", "@id": "https://tools.land.me.uk/percentage-calculator#app",
+        "name": "Percentage Calculator",
+        "url": "https://tools.land.me.uk/percentage-calculator",
+        "description": "Free percentage calculator with six modes: X% of Y, reverse percentage, percentage change, increase, decrease and find the whole.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+      { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Tools", "item": "https://tools.land.me.uk/" },
+        { "@type": "ListItem", "position": 2, "name": "Percentage Calculator", "item": "https://tools.land.me.uk/percentage-calculator" }
+      ]},
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "How do I calculate a percentage of a number?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Multiply the number by the percentage, then divide by 100. For example, 20% of 500 = (20 × 500) ÷ 100 = 100." } },
+        { "@type": "Question", "name": "How do I calculate percentage increase?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Subtract the original value from the new value, divide by the original value, then multiply by 100. Example: from 80 to 100 = ((100 − 80) ÷ 80) × 100 = 25% increase." } },
+        { "@type": "Question", "name": "How do I calculate percentage decrease?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Subtract the new value from the original value, divide by the original value, then multiply by 100. Example: from 100 to 80 = ((100 − 80) ÷ 100) × 100 = 20% decrease." } },
+        { "@type": "Question", "name": "What is the difference between percentage change and percentage difference?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Percentage change divides the difference by the original value. Percentage difference divides the difference by the average of the two values. Change is used when one value is the starting point; difference is used when neither value is a baseline." } },
+        { "@type": "Question", "name": "How do I work out the original price after a discount?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Divide the sale price by (1 minus the discount divided by 100). Example: sale price £80 after 20% off means the original was £80 ÷ 0.8 = £100." } },
+        { "@type": "Question", "name": "What is 20% of 100?",
+          "acceptedAnswer": { "@type": "Answer", "text": "20% of 100 is 20. Calculation: (20 × 100) ÷ 100 = 20." } },
+        { "@type": "Question", "name": "What is 15% of 200?",
+          "acceptedAnswer": { "@type": "Answer", "text": "15% of 200 is 30. Calculation: (15 × 200) ÷ 100 = 30." } },
+        { "@type": "Question", "name": "What is the difference between percentage and percent?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Percent is the unit (the % symbol). Percentage is the concept or the result. In everyday use the two are interchangeable." } }
+      ]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo" aria-label="Tools home">
+          <span class="logo-mark" aria-hidden="true"><i class="fas fa-calculator"></i></span>
+          <span class="logo-text">Tools<em>.land</em></span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="/#calculators" class="btn-nav-primary">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;All Calculators
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span>
+      <span class="current">Percentage Calculator</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge">
+        <i class="fas fa-percent"></i> 6 modes · Live formula · Instant
+      </div>
+      <h1>Percentage <em>Calculator</em></h1>
+      <p>
+        Six ways to work with percentages — from the basic "X% of Y" to reverse
+        percentages and increase/decrease calculations. Every result shows the
+        formula, so you can verify the maths yourself.
+      </p>
+    </section>
+
+    <!-- ══════════════ CALCULATOR ══════════════ -->
+    <section class="tool-wrap">
+      <div class="tool-card tool-card--flagship" data-tool="percentage">
+
+        <!-- Mode tabs -->
+        <div class="tool-tabs tool-tabs--scroll" role="tablist" aria-label="Percentage mode">
+          <button class="tool-tab active" role="tab" aria-selected="true" data-mode="of">
+            <i class="fas fa-percent"></i>
+            <span>X% of Y</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="isWhat">
+            <i class="fas fa-arrow-right-arrow-left"></i>
+            <span>X is what % of Y</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="change">
+            <i class="fas fa-arrow-trend-up"></i>
+            <span>% change</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="increase">
+            <i class="fas fa-plus"></i>
+            <span>Increase by %</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="decrease">
+            <i class="fas fa-minus"></i>
+            <span>Decrease by %</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="findWhole">
+            <i class="fas fa-magnifying-glass"></i>
+            <span>Find the whole</span>
+          </button>
+        </div>
+
+        <!-- Panel: X% of Y -->
+        <div class="tool-panel" data-panel="of">
+          <p class="tool-panel__hint">What is <em>X%</em> of <em>Y</em>?</p>
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Percentage</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctOfPercent" placeholder="20" autocomplete="off" />
+                <span class="tool-field__suffix">%</span>
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Of number</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctOfNumber" placeholder="500" autocomplete="off" />
+              </span>
+            </label>
+          </div>
+          <div class="tool-presets" role="group" aria-label="Quick percentages">
+            <span class="tool-presets__label">Quick:</span>
+            <button type="button" class="tool-preset" data-preset="5"  data-preset-target="pctOfPercent">5%</button>
+            <button type="button" class="tool-preset" data-preset="10" data-preset-target="pctOfPercent">10%</button>
+            <button type="button" class="tool-preset" data-preset="15" data-preset-target="pctOfPercent">15%</button>
+            <button type="button" class="tool-preset" data-preset="20" data-preset-target="pctOfPercent">20%</button>
+            <button type="button" class="tool-preset" data-preset="25" data-preset-target="pctOfPercent">25%</button>
+            <button type="button" class="tool-preset" data-preset="50" data-preset-target="pctOfPercent">50%</button>
+          </div>
+        </div>
+
+        <!-- Panel: X is what % of Y -->
+        <div class="tool-panel hidden" data-panel="isWhat">
+          <p class="tool-panel__hint"><em>X</em> is what percent of <em>Y</em>?</p>
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Number</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctIsNumber" placeholder="15" autocomplete="off" />
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Of total</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctIsTotal" placeholder="200" autocomplete="off" />
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Panel: Percentage change -->
+        <div class="tool-panel hidden" data-panel="change">
+          <p class="tool-panel__hint">Percentage <em>increase or decrease</em> between two values</p>
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Original value</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctChangeFrom" placeholder="80" autocomplete="off" />
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">New value</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctChangeTo" placeholder="100" autocomplete="off" />
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Panel: Increase by % -->
+        <div class="tool-panel hidden" data-panel="increase">
+          <p class="tool-panel__hint">Increase a value by a <em>percentage</em></p>
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Starting value</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctIncValue" placeholder="200" autocomplete="off" />
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Increase by</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctIncPercent" placeholder="15" autocomplete="off" />
+                <span class="tool-field__suffix">%</span>
+              </span>
+            </label>
+          </div>
+          <div class="tool-presets">
+            <span class="tool-presets__label">Quick:</span>
+            <button type="button" class="tool-preset" data-preset="5"  data-preset-target="pctIncPercent">+5%</button>
+            <button type="button" class="tool-preset" data-preset="10" data-preset-target="pctIncPercent">+10%</button>
+            <button type="button" class="tool-preset" data-preset="20" data-preset-target="pctIncPercent">+20%</button>
+            <button type="button" class="tool-preset" data-preset="50" data-preset-target="pctIncPercent">+50%</button>
+            <button type="button" class="tool-preset" data-preset="100" data-preset-target="pctIncPercent">+100%</button>
+          </div>
+        </div>
+
+        <!-- Panel: Decrease by % -->
+        <div class="tool-panel hidden" data-panel="decrease">
+          <p class="tool-panel__hint">Decrease a value by a <em>percentage</em></p>
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Starting value</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctDecValue" placeholder="200" autocomplete="off" />
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Decrease by</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctDecPercent" placeholder="15" autocomplete="off" />
+                <span class="tool-field__suffix">%</span>
+              </span>
+            </label>
+          </div>
+          <div class="tool-presets">
+            <span class="tool-presets__label">Quick:</span>
+            <button type="button" class="tool-preset" data-preset="5"  data-preset-target="pctDecPercent">−5%</button>
+            <button type="button" class="tool-preset" data-preset="10" data-preset-target="pctDecPercent">−10%</button>
+            <button type="button" class="tool-preset" data-preset="20" data-preset-target="pctDecPercent">−20%</button>
+            <button type="button" class="tool-preset" data-preset="25" data-preset-target="pctDecPercent">−25%</button>
+            <button type="button" class="tool-preset" data-preset="50" data-preset-target="pctDecPercent">−50%</button>
+          </div>
+        </div>
+
+        <!-- Panel: Find the whole -->
+        <div class="tool-panel hidden" data-panel="findWhole">
+          <p class="tool-panel__hint"><em>X</em> is <em>Y%</em> of what number?</p>
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Part</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctFwPart" placeholder="30" autocomplete="off" />
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Is this percent of…</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="any" id="pctFwPercent" placeholder="15" autocomplete="off" />
+                <span class="tool-field__suffix">%</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="tool-result tool-result--flagship" data-result aria-live="polite">
+          <span class="tool-result__label">Result</span>
+          <span class="tool-result__value" data-result-value>—</span>
+          <span class="tool-result__detail" data-result-detail></span>
+          <span class="tool-result__formula" data-result-formula></span>
+        </div>
+
+        <!-- Actions -->
+        <div class="tool-actions tool-actions--rich">
+          <button class="tool-btn tool-btn--primary" data-action="copy" type="button">
+            <i class="fas fa-copy"></i><span>Copy result</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="share" type="button">
+            <i class="fas fa-share-nodes"></i><span>Share link</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost tool-btn--danger" data-action="reset" type="button">
+            <i class="fas fa-rotate-left"></i><span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Session history -->
+        <div class="tool-history" data-history></div>
+
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ HOW IT WORKS ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">How It Works</span>
+        <h2 class="content-title">Six <em>Formulas</em></h2>
+        <p class="content-lead">
+          Every mode uses one of the standard percentage formulas below. Copy any
+          formula into a spreadsheet and the numbers will match this calculator exactly.
+        </p>
+      </header>
+
+      <div class="prose">
+        <h3>1 — What is X% of Y?</h3>
+        <p>Multiply the number by the percentage, then divide by 100.</p>
+        <p><code>Result = (X ÷ 100) × Y</code></p>
+        <p><strong>Example:</strong> 20% of 500 = (20 ÷ 100) × 500 = 100.</p>
+
+        <h3>2 — X is what % of Y?</h3>
+        <p>Divide the number by the total, then multiply by 100.</p>
+        <p><code>Result = (X ÷ Y) × 100</code></p>
+        <p><strong>Example:</strong> 15 out of 200 = (15 ÷ 200) × 100 = 7.5%.</p>
+
+        <h3>3 — Percentage increase or decrease</h3>
+        <p>Subtract the original from the new, divide by the original, then multiply by 100. A positive result is an increase; negative is a decrease.</p>
+        <p><code>Result = ((new − old) ÷ old) × 100</code></p>
+        <p><strong>Example:</strong> from 80 to 100 = ((100 − 80) ÷ 80) × 100 = +25%.</p>
+
+        <h3>4 — Increase a value by %</h3>
+        <p>Multiply the value by (1 + percentage/100).</p>
+        <p><code>Result = Value × (1 + X/100)</code></p>
+        <p><strong>Example:</strong> 200 increased by 15% = 200 × 1.15 = 230.</p>
+
+        <h3>5 — Decrease a value by %</h3>
+        <p>Multiply the value by (1 − percentage/100).</p>
+        <p><code>Result = Value × (1 − X/100)</code></p>
+        <p><strong>Example:</strong> 200 decreased by 15% = 200 × 0.85 = 170.</p>
+
+        <h3>6 — X is Y% of what number?</h3>
+        <p>Divide the part by the percentage, then multiply by 100.</p>
+        <p><code>Result = (X ÷ Y) × 100</code></p>
+        <p><strong>Example:</strong> 30 is 15% of what? (30 ÷ 15) × 100 = 200.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ EXAMPLES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Worked Examples</span>
+        <h2 class="content-title">Common <em>Calculations</em></h2>
+        <p class="content-lead">Every answer was verified against the calculator above.</p>
+      </header>
+
+      <div class="tool-examples">
+        <table class="tool-examples__table">
+          <thead>
+            <tr><th>Question</th><th>Calculation</th><th>Answer</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>What is 20% of 500?</td><td>(20 ÷ 100) × 500</td><td><strong>100</strong></td></tr>
+            <tr><td>What is 15% of 200?</td><td>(15 ÷ 100) × 200</td><td><strong>30</strong></td></tr>
+            <tr><td>What is 7.5% of 80?</td><td>(7.5 ÷ 100) × 80</td><td><strong>6</strong></td></tr>
+            <tr><td>What is 125% of 40?</td><td>(125 ÷ 100) × 40</td><td><strong>50</strong></td></tr>
+            <tr><td>15 is what percent of 200?</td><td>(15 ÷ 200) × 100</td><td><strong>7.5%</strong></td></tr>
+            <tr><td>45 is what percent of 60?</td><td>(45 ÷ 60) × 100</td><td><strong>75%</strong></td></tr>
+            <tr><td>From 80 to 100 — percent change?</td><td>((100 − 80) ÷ 80) × 100</td><td><strong>+25%</strong></td></tr>
+            <tr><td>From 100 to 80 — percent change?</td><td>((80 − 100) ÷ 100) × 100</td><td><strong>−20%</strong></td></tr>
+            <tr><td>200 increased by 15%?</td><td>200 × 1.15</td><td><strong>230</strong></td></tr>
+            <tr><td>200 decreased by 15%?</td><td>200 × 0.85</td><td><strong>170</strong></td></tr>
+            <tr><td>30 is 15% of what?</td><td>(30 ÷ 15) × 100</td><td><strong>200</strong></td></tr>
+            <tr><td>£80 after 20% discount — original?</td><td>80 ÷ 0.8</td><td><strong>£100</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ COMMON USES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Everyday Uses</span>
+        <h2 class="content-title">When You'll <em>Need This</em></h2>
+      </header>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-tag"></i></div>
+          <h3>Discounts</h3>
+          <p>A 30% off sale on a £80 item. Mode 1 gives the discount, Mode 5 gives the sale price directly.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-receipt"></i></div>
+          <h3>Tips</h3>
+          <p>20% tip on a £47.50 meal — Mode 1 gives the tip amount instantly.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-chart-line"></i></div>
+          <h3>Interest &amp; growth</h3>
+          <p>An investment grew from £1,200 to £1,500. Mode 3 tells you the return.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon purple"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Test scores</h3>
+          <p>42 correct out of 50. Mode 2 converts that to a percentage grade.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-percent"></i></div>
+          <h3>Tax</h3>
+          <p>VAT, sales tax or income tax — any tax expressed as a percentage uses Mode 1 or Mode 4.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon red"><i class="fas fa-arrow-trend-down"></i></div>
+          <h3>Price drops</h3>
+          <p>From £250 down to £200 — Mode 3 shows the drop as a percentage.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-arrow-up-right-dots"></i></div>
+          <h3>Inflation</h3>
+          <p>Prices rose from £4 to £5 — Mode 3 says +25%. Mode 4 tells you next year's price after any increase.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-piggy-bank"></i></div>
+          <h3>Savings targets</h3>
+          <p>You saved £300 of a £1,200 goal. Mode 2 shows you're 25% of the way there.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════ FAQ ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Questions</span>
+        <h2 class="content-title">Percentage <em>FAQ</em></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-row">
+          <summary>How do I calculate a percentage of a number?</summary>
+          <div class="faq-row__answer"><p>Multiply the number by the percentage, then divide by 100. Example: 20% of 500 = (20 × 500) ÷ 100 = 100.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How do I calculate percentage increase?</summary>
+          <div class="faq-row__answer"><p>Subtract the original from the new, divide by the original, then multiply by 100. Example: from 80 to 100 = ((100 − 80) ÷ 80) × 100 = 25% increase.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How do I calculate percentage decrease?</summary>
+          <div class="faq-row__answer"><p>Subtract the new from the original, divide by the original, then multiply by 100. Example: from 100 to 80 = ((100 − 80) ÷ 100) × 100 = 20% decrease.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is the difference between percentage change and percentage difference?</summary>
+          <div class="faq-row__answer"><p>Percentage change divides the difference by the <strong>original</strong> value. Percentage difference divides the difference by the <strong>average</strong> of the two values. Change is used when one value is a starting point; difference is used when neither value is a baseline.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How do I work out the original price after a discount?</summary>
+          <div class="faq-row__answer"><p>Divide the sale price by (1 minus the discount divided by 100). Example: sale price £80 after 20% off means the original was £80 ÷ 0.8 = £100. Use Mode 6 for this.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is 20% of 100?</summary>
+          <div class="faq-row__answer"><p>20% of 100 is <strong>20</strong>. Calculation: (20 × 100) ÷ 100 = 20.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is 15% of 200?</summary>
+          <div class="faq-row__answer"><p>15% of 200 is <strong>30</strong>. Calculation: (15 × 200) ÷ 100 = 30.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is the difference between percentage and percent?</summary>
+          <div class="faq-row__answer"><p><em>Percent</em> is the unit (the % symbol). <em>Percentage</em> is the concept or the result. In everyday use the two are interchangeable.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ RELATED ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Related Tools</span>
+        <h2 class="content-title">You Might Also <em>Need</em></h2>
+      </header>
+
+      <div class="similar-grid">
+        <a href="/discount-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-tags"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Discount Calculator</span>
+            <span class="similar-meta">Sale price &amp; savings</span>
+          </span>
+        </a>
+        <a href="/tip-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-receipt"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Tip Calculator</span>
+            <span class="similar-meta">Tip and split the bill</span>
+          </span>
+        </a>
+        <a href="/loan-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-building-columns"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Loan Calculator</span>
+            <span class="similar-meta">Monthly payment &amp; interest</span>
+          </span>
+        </a>
+        <a href="/" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calculator"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">All Calculators</span>
+            <span class="similar-meta">Back to hub</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <p class="last-updated">
+      <i class="fas fa-circle-check"></i>
+      Last updated: <time datetime="2026-01-01">1 January 2026</time>.
+      Formulas are standard and verified against manual calculation.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p>
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/legal.html">Privacy</a> ·
+      <a href="/legal.html">Terms</a> ·
+      <a href="https://land.me.uk/">Hub</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+  <script type="module" src="/js/calculator-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Age Calculator — Free Online Date of Birth Calculator | Tools</title>
+  <meta name="description" content="Free age calculator. Find your exact age in years, months, days, weeks, hours and minutes from any date of birth. Shows zodiac sign and day you were born." />
+  <meta name="keywords" content="age calculator, date of birth calculator, how old am i, age in days, age in months, born on what day, age difference calculator" />
+  <link rel="canonical" href="https://tools.land.me.uk/age-calculator" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tools — Free Online Calculators" />
+  <meta property="og:url" content="https://tools.land.me.uk/age-calculator" />
+  <meta property="og:title" content="Age Calculator — Free, Instant, Private" />
+  <meta property="og:description" content="Exact age in years, months, days, weeks, hours and minutes. Includes zodiac and day of birth." />
+  <meta property="og:image" content="https://tools.land.me.uk/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication",
+        "name": "Age Calculator",
+        "url": "https://tools.land.me.uk/age-calculator",
+        "description": "Free online age calculator. Find exact age in years, months, days, weeks, hours and minutes from any date of birth.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+      { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Tools", "item": "https://tools.land.me.uk/" },
+        { "@type": "ListItem", "position": 2, "name": "Age Calculator", "item": "https://tools.land.me.uk/age-calculator" }
+      ]},
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "How is age calculated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Age is calculated by subtracting the date of birth from the reference date, accounting for the exact number of days in each month and leap years." } },
+        { "@type": "Question", "name": "How do I calculate my age in days?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Multiply your age in years by 365.25 and add the days since your last birthday. The calculator does this automatically and shows the exact number." } },
+        { "@type": "Question", "name": "Does the calculator handle leap years?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Leap years and varying month lengths are handled automatically, so someone born on 29 February is counted correctly in non-leap years." } },
+        { "@type": "Question", "name": "Can I calculate my age on a future date?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Change the 'as of' date to any future date to see your age at that point in time. Useful for retirement planning, visa applications and event countdowns." } },
+        { "@type": "Question", "name": "What is my zodiac sign?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The calculator shows your Western zodiac sign based on your date of birth. It does not include Chinese zodiac, Vedic astrology or other systems." } },
+        { "@type": "Question", "name": "How does the calculator know what day I was born on?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It uses the calendar date to determine the day of the week. For example, 1 January 2000 was a Saturday." } }
+      ]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo"><span class="logo-mark"><i class="fas fa-calculator"></i></span><span class="logo-text">Tools<em>.land</em></span></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions"><a href="/#calculators" class="btn-nav-primary"><i class="fas fa-arrow-left"></i>&nbsp;All Calculators</a></div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span><span class="current">Age Calculator</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge"><i class="fas fa-cake-candles"></i> Live · Instant · Private</div>
+      <h1>Age <em>Calculator</em></h1>
+      <p>
+        Find your exact age in years, months, days, weeks, hours and minutes.
+        See what day of the week you were born and your zodiac sign.
+      </p>
+    </section>
+
+    <!-- ══════════════ CALCULATOR ══════════════ -->
+    <section class="tool-wrap">
+      <div class="tool-card tool-card--flagship" data-tool="age">
+
+        <div class="tool-inputs">
+          <label class="tool-field">
+            <span class="tool-field__label">Date of birth</span>
+            <span class="tool-field__inputwrap">
+              <input type="date" id="ageDob" autocomplete="off" max="2100-12-31" />
+            </span>
+          </label>
+          <label class="tool-field">
+            <span class="tool-field__label">As of date <em>(optional)</em></span>
+            <span class="tool-field__inputwrap">
+              <input type="date" id="ageRef" autocomplete="off" />
+            </span>
+          </label>
+        </div>
+
+        <div class="tool-presets" role="group" aria-label="As-of shortcuts">
+          <span class="tool-presets__label">Jump to:</span>
+          <button type="button" class="tool-preset" data-action="today"><i class="fas fa-calendar-day"></i> Today</button>
+        </div>
+
+        <div class="tool-result tool-result--flagship" data-result aria-live="polite">
+          <span class="tool-result__label">Your age</span>
+          <span class="tool-result__value" data-result-value>—</span>
+          <span class="tool-result__detail" data-result-detail></span>
+          <span class="tool-result__formula" data-result-formula></span>
+        </div>
+
+        <div class="tool-actions tool-actions--rich">
+          <button class="tool-btn tool-btn--primary" data-action="copy" type="button">
+            <i class="fas fa-copy"></i><span>Copy result</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="share" type="button">
+            <i class="fas fa-share-nodes"></i><span>Share link</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost tool-btn--danger" data-action="reset" type="button">
+            <i class="fas fa-rotate-left"></i><span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="wc-empty" data-age-empty>
+          <i class="fas fa-cake-candles"></i>
+          <p>Enter your date of birth to see your exact age.</p>
+        </div>
+
+        <!-- Full stats grid -->
+        <div class="wc-stats hidden" data-age-stats>
+          <div class="wc-stat" data-age-stat="totalMonths">
+            <span class="wc-stat__label">Months</span>
+            <span class="wc-stat__value" data-age-value>0</span>
+          </div>
+          <div class="wc-stat" data-age-stat="totalWeeks">
+            <span class="wc-stat__label">Weeks</span>
+            <span class="wc-stat__value" data-age-value>0</span>
+          </div>
+          <div class="wc-stat wc-stat--primary" data-age-stat="totalDays">
+            <span class="wc-stat__label">Days</span>
+            <span class="wc-stat__value" data-age-value>0</span>
+          </div>
+          <div class="wc-stat" data-age-stat="totalHours">
+            <span class="wc-stat__label">Hours</span>
+            <span class="wc-stat__value" data-age-value>0</span>
+          </div>
+          <div class="wc-stat" data-age-stat="totalMins">
+            <span class="wc-stat__label">Minutes</span>
+            <span class="wc-stat__value" data-age-value>0</span>
+          </div>
+          <div class="wc-stat" data-age-stat="totalSecs">
+            <span class="wc-stat__label">Seconds</span>
+            <span class="wc-stat__value" data-age-value>0</span>
+          </div>
+          <div class="wc-stat" data-age-stat="bornOn">
+            <span class="wc-stat__label">Born on a</span>
+            <span class="wc-stat__value" data-age-value>—</span>
+          </div>
+          <div class="wc-stat" data-age-stat="zodiac">
+            <span class="wc-stat__label">Zodiac</span>
+            <span class="wc-stat__value" data-age-value>—</span>
+          </div>
+        </div>
+
+        <div class="age-birthday" data-age-birthday></div>
+
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ HOW IT WORKS ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">How It Works</span>
+        <h2 class="content-title">How Age is <em>Calculated</em></h2>
+      </header>
+      <div class="prose">
+        <p>Age is the difference between two dates: your date of birth, and the reference date (today by default). The calculator gives you that difference in several useful units.</p>
+
+        <h3>Years, months and days</h3>
+        <p>This is the natural way people describe age. It counts whole years first, then whole months, then the remaining days. Someone born on 15 March 1990 on 20 June 2025 would be 35 years, 3 months and 5 days old.</p>
+
+        <h3>Total months, weeks, days, hours, minutes and seconds</h3>
+        <p>These are the raw totals. Total days is the exact number of days you have been alive. Hours, minutes and seconds extend the same count down to finer units.</p>
+
+        <h3>Leap years</h3>
+        <p>Every four years (with a few exceptions) February has 29 days. The calculator accounts for this automatically. Someone born on 29 February is treated as having a birthday on 28 February in non-leap years for the purpose of day counting.</p>
+
+        <h3>Zodiac sign</h3>
+        <p>The calculator shows your <strong>Western</strong> zodiac sign based on your birth date. Signs run from Capricorn (late December) through to Sagittarius (late November). Chinese zodiac, Vedic astrology and other systems are not included.</p>
+
+        <h3>Day of the week</h3>
+        <p>Each calendar date falls on a fixed day of the week. The calculator shows which one you were born on — for example, 1 January 2000 was a Saturday.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ EXAMPLES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Reference</span>
+        <h2 class="content-title">Notable <em>Dates</em></h2>
+      </header>
+
+      <div class="tool-examples">
+        <table class="tool-examples__table">
+          <thead><tr><th>Born on</th><th>Zodiac</th><th>Day of week</th></tr></thead>
+          <tbody>
+            <tr><td>1 January 2000</td><td>Capricorn</td><td><strong>Saturday</strong></td></tr>
+            <tr><td>15 June 1990</td><td>Gemini</td><td><strong>Friday</strong></td></tr>
+            <tr><td>29 February 2000</td><td>Pisces</td><td><strong>Tuesday</strong></td></tr>
+            <tr><td>4 July 1976</td><td>Cancer</td><td><strong>Sunday</strong></td></tr>
+            <tr><td>25 December 1995</td><td>Capricorn</td><td><strong>Monday</strong></td></tr>
+            <tr><td>14 February 2005</td><td>Aquarius</td><td><strong>Monday</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ USES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Everyday Uses</span>
+        <h2 class="content-title">When You'll <em>Need This</em></h2>
+      </header>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-passport"></i></div>
+          <h3>Passport & visa forms</h3>
+          <p>Many forms ask for age on a specific date or require you to be at least X years old when you travel.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-cake-candles"></i></div>
+          <h3>Birthday countdowns</h3>
+          <p>The calculator shows exactly how many days until your next birthday.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon purple"><i class="fas fa-shield-halved"></i></div>
+          <h3>Age verification</h3>
+          <p>Restaurants, retailers and online services ask for age on a specific date. Get it right in one glance.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-briefcase"></i></div>
+          <h3>Employment & retirement</h3>
+          <p>Working out when you will hit a pension milestone, or exactly how long you have worked somewhere.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon red"><i class="fas fa-heart-pulse"></i></div>
+          <h3>Medical & paediatric</h3>
+          <p>Doctors and parents track infant age in weeks or months. The calculator shows those units instantly.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-star"></i></div>
+          <h3>Astrology curiosity</h3>
+          <p>See your Western zodiac sign and the day of the week you were born — just for fun.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════ FAQ ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Questions</span>
+        <h2 class="content-title">Age <em>FAQ</em></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-row">
+          <summary>How is age calculated?</summary>
+          <div class="faq-row__answer"><p>Age is calculated by subtracting the date of birth from the reference date, accounting for the exact number of days in each month and leap years.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How do I calculate my age in days?</summary>
+          <div class="faq-row__answer"><p>Multiply your age in years by 365.25 and add the days since your last birthday. The calculator does this automatically and shows the exact number.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Does the calculator handle leap years?</summary>
+          <div class="faq-row__answer"><p>Yes. Leap years and varying month lengths are handled automatically, so someone born on 29 February is counted correctly in non-leap years.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Can I calculate my age on a future date?</summary>
+          <div class="faq-row__answer"><p>Yes. Change the "as of" date to any future date to see your age at that point in time. Useful for retirement planning, visa applications and event countdowns.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is my zodiac sign?</summary>
+          <div class="faq-row__answer"><p>The calculator shows your Western zodiac sign based on your date of birth. It does not include Chinese zodiac, Vedic astrology or other systems.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How does the calculator know what day I was born on?</summary>
+          <div class="faq-row__answer"><p>It uses the calendar date to determine the day of the week. For example, 1 January 2000 was a Saturday.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is my date of birth stored anywhere?</summary>
+          <div class="faq-row__answer"><p>No. The calculation runs entirely in your browser. Nothing is uploaded, logged or shared. If you use a shared computer, clearing the browser history removes any URL state.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ RELATED ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Related Tools</span>
+        <h2 class="content-title">You Might Also <em>Need</em></h2>
+      </header>
+
+      <div class="similar-grid">
+        <a href="/date-difference" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calendar-days"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Date Difference</span>
+            <span class="similar-meta">Days between any two dates</span>
+          </span>
+        </a>
+        <a href="/percentage-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-percent"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Percentage Calculator</span>
+            <span class="similar-meta">Six modes, live formula</span>
+          </span>
+        </a>
+        <a href="/word-counter" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-pen-nib"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Word Counter</span>
+            <span class="similar-meta">Live stats and keywords</span>
+          </span>
+        </a>
+        <a href="/" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calculator"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">All Calculators</span>
+            <span class="similar-meta">Back to hub</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <p class="last-updated">
+      <i class="fas fa-circle-check"></i>
+      Last updated: <time datetime="2026-01-01">1 January 2026</time>.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p>
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/legal.html">Privacy</a> ·
+      <a href="/legal.html">Terms</a> ·
+      <a href="https://land.me.uk/">Hub</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+  <script type="module" src="/js/calculator-page.js"></script>
+</body>
+</html>

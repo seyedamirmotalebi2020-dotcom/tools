@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>BMI Calculator — Free Body Mass Index Calculator | Tools</title>
+  <meta name="description" content="Free BMI calculator. Body mass index in metric or imperial units, with healthy weight range for your height. Instant, private, no signup." />
+  <meta name="keywords" content="bmi calculator, body mass index, bmi chart, healthy weight, bmi imperial, bmi metric, bmi for height" />
+  <link rel="canonical" href="https://tools.land.me.uk/bmi-calculator" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tools — Free Online Calculators" />
+  <meta property="og:url" content="https://tools.land.me.uk/bmi-calculator" />
+  <meta property="og:title" content="BMI Calculator — Free, Instant, Private" />
+  <meta property="og:description" content="Body mass index with healthy weight range, prime weight, and full scale." />
+  <meta property="og:image" content="https://tools.land.me.uk/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication",
+        "name": "BMI Calculator",
+        "url": "https://tools.land.me.uk/bmi-calculator",
+        "description": "Free BMI calculator for metric and imperial units, with healthy weight range.",
+        "applicationCategory": "HealthApplication", "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+      { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Tools", "item": "https://tools.land.me.uk/" },
+        { "@type": "ListItem", "position": 2, "name": "BMI Calculator", "item": "https://tools.land.me.uk/bmi-calculator" }
+      ]},
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "What is a healthy BMI?",
+          "acceptedAnswer": { "@type": "Answer", "text": "For most adults, a BMI between 18.5 and 24.9 is considered healthy. Below 18.5 is underweight, 25–29.9 is overweight, and 30 or above is obese." } },
+        { "@type": "Question", "name": "Is BMI accurate for everyone?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. BMI does not distinguish between muscle and fat, and it is not reliable for athletes, pregnant women, children, or the elderly. Use it as a rough guide only." } },
+        { "@type": "Question", "name": "How is BMI calculated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "BMI = weight in kilograms divided by height in metres squared. For imperial units: BMI = (weight in pounds × 703) ÷ (height in inches squared)." } },
+        { "@type": "Question", "name": "What is a prime BMI?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A BMI of 22 is often cited as the midpoint of the healthy range and associated with the lowest risk in population studies. It is not a personal target, just a common reference point." } },
+        { "@type": "Question", "name": "Does BMI apply to children?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Not to the standard adult scale. Children and teenagers use age- and sex-specific BMI percentile charts. Consult a paediatrician for accurate assessment." } },
+        { "@type": "Question", "name": "Should I use BMI to decide if I need to lose weight?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Speak to a doctor or dietitian. BMI is one data point among many and can be misleading on its own." } }
+      ]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo"><span class="logo-mark"><i class="fas fa-calculator"></i></span><span class="logo-text">Tools<em>.land</em></span></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions"><a href="/#calculators" class="btn-nav-primary"><i class="fas fa-arrow-left"></i>&nbsp;All Calculators</a></div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span><span class="current">BMI Calculator</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge"><i class="fas fa-heart-pulse"></i> Metric &amp; Imperial · Private</div>
+      <h1>BMI <em>Calculator</em></h1>
+      <p>
+        Body mass index with your healthy weight range, prime weight, and a
+        visual scale — in metric or imperial units.
+      </p>
+    </section>
+
+    <!-- ══════════════ CALCULATOR ══════════════ -->
+    <section class="tool-wrap">
+      <div class="tool-card tool-card--flagship" data-tool="bmi">
+
+        <!-- Unit toggle -->
+        <div class="tool-toggle" role="tablist" aria-label="Unit system">
+          <button type="button" class="active" data-bmi-unit="metric" role="tab" aria-selected="true">Metric</button>
+          <button type="button" data-bmi-unit="imperial" role="tab" aria-selected="false">Imperial</button>
+        </div>
+
+        <div class="tool-inputs">
+          <label class="tool-field">
+            <span class="tool-field__label" data-bmi-weight-label>Weight</span>
+            <span class="tool-field__inputwrap">
+              <input type="number" inputmode="decimal" step="any" min="0" id="bmiWeight" placeholder="70" autocomplete="off" />
+              <span class="tool-field__suffix" data-bmi-weight-suffix>kg</span>
+            </span>
+          </label>
+          <label class="tool-field">
+            <span class="tool-field__label" data-bmi-height-label>Height</span>
+            <span class="tool-field__inputwrap">
+              <input type="number" inputmode="decimal" step="any" min="0" id="bmiHeight" placeholder="175" autocomplete="off" />
+              <span class="tool-field__suffix" data-bmi-height-suffix>cm</span>
+            </span>
+          </label>
+        </div>
+
+        <!-- Result -->
+        <div class="tool-result tool-result--flagship" data-result aria-live="polite" style="margin-top: var(--sp-3);">
+          <span class="tool-result__label">Your BMI</span>
+          <span class="tool-result__value" data-result-value>—</span>
+          <span class="tool-result__detail" data-result-detail></span>
+          <span class="tool-result__formula" data-result-formula></span>
+        </div>
+
+        <!-- Visual scale -->
+        <div class="bmi-scale hidden" data-bmi-scale>
+          <div class="bmi-scale__bar">
+            <div class="bmi-zone bmi-zone--under"></div>
+            <div class="bmi-zone bmi-zone--normal"></div>
+            <div class="bmi-zone bmi-zone--over"></div>
+            <div class="bmi-zone bmi-zone--obese"></div>
+          </div>
+          <div class="bmi-scale__marker" data-bmi-marker></div>
+          <div class="bmi-scale__labels">
+            <span>15</span>
+            <span>18.5</span>
+            <span>25</span>
+            <span>30</span>
+            <span>40</span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="tool-actions tool-actions--rich">
+          <button class="tool-btn tool-btn--primary" data-action="copy" type="button">
+            <i class="fas fa-copy"></i><span>Copy result</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="share" type="button">
+            <i class="fas fa-share-nodes"></i><span>Share link</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost tool-btn--danger" data-action="reset" type="button">
+            <i class="fas fa-rotate-left"></i><span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="wc-empty" data-bmi-empty>
+          <i class="fas fa-heart-pulse"></i>
+          <p>Enter your weight and height to see your BMI and healthy range.</p>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="wc-stats hidden" data-bmi-stats>
+
+          <div class="wc-stat" data-bmi-stat="category">
+            <span class="wc-stat__label">Category</span>
+            <span class="wc-stat__value" data-bmi-value>—</span>
+          </div>
+          <div class="wc-stat wc-stat--primary" data-bmi-stat="healthyMin">
+            <span class="wc-stat__label">Healthy min</span>
+            <span class="wc-stat__value" data-bmi-value>—</span>
+          </div>
+          <div class="wc-stat" data-bmi-stat="healthyMax">
+            <span class="wc-stat__label">Healthy max</span>
+            <span class="wc-stat__value" data-bmi-value>—</span>
+          </div>
+          <div class="wc-stat" data-bmi-stat="primeWeight">
+            <span class="wc-stat__label">Prime weight</span>
+            <span class="wc-stat__value" data-bmi-value>—</span>
+          </div>
+
+          <div class="wc-stat hidden" data-bmi-stat="weightToChange">
+            <span class="wc-stat__label">To healthy</span>
+            <span class="wc-stat__value" data-bmi-value>—</span>
+          </div>
+          <div class="wc-stat" data-bmi-stat="percentFromMid">
+            <span class="wc-stat__label">From midpoint</span>
+            <span class="wc-stat__value" data-bmi-value>—</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Medical disclaimer -->
+    <aside class="caution-banner" role="note" aria-label="Medical disclaimer">
+      <div class="caution-banner__icon" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></div>
+      <div class="caution-banner__body">
+        <div class="caution-banner__title">Medical Disclaimer</div>
+        <p class="caution-banner__text">
+          This BMI calculator is for general information only and is <strong>not medical advice</strong>.
+          BMI is a screening tool, not a diagnosis. It does not measure body fat, muscle mass or
+          overall health. Always consult a qualified healthcare professional before making decisions
+          about your weight, diet or exercise.
+        </p>
+      </div>
+    </aside>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ HOW IT WORKS ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">How It Works</span>
+        <h2 class="content-title">The BMI <em>Formula</em></h2>
+      </header>
+      <div class="prose">
+        <h3>Metric formula</h3>
+        <p><code>BMI = weight (kg) ÷ height (m)²</code></p>
+        <p><strong>Example:</strong> 70 kg, 1.75 m → BMI = 70 ÷ 3.0625 = 22.9.</p>
+
+        <h3>Imperial formula</h3>
+        <p><code>BMI = (weight (lb) × 703) ÷ height (in)²</code></p>
+        <p><strong>Example:</strong> 154 lb, 69 in → BMI = (154 × 703) ÷ 4761 = 22.7.</p>
+
+        <h3>BMI categories (WHO adult scale)</h3>
+        <ul>
+          <li><strong>Below 16</strong> — Severely underweight</li>
+          <li><strong>16 to 18.4</strong> — Underweight</li>
+          <li><strong>18.5 to 24.9</strong> — Normal weight</li>
+          <li><strong>25 to 29.9</strong> — Overweight</li>
+          <li><strong>30 to 34.9</strong> — Obese Class I</li>
+          <li><strong>35 to 39.9</strong> — Obese Class II</li>
+          <li><strong>40 and above</strong> — Obese Class III</li>
+        </ul>
+
+        <h3>Healthy weight range</h3>
+        <p>The calculator shows the weight range that would put you between BMI 18.5 and 24.9 at your current height. That is the "healthy weight range" shown on many medical charts. It does not account for muscle mass, bone density, age or sex.</p>
+
+        <h3>Prime weight (BMI 22)</h3>
+        <p>A BMI of 22 is often cited as the midpoint of the healthy range and associated with the lowest all-cause mortality in large population studies. It is a reference point, not a personal goal.</p>
+
+        <h3>What BMI cannot tell you</h3>
+        <p>BMI cannot distinguish between fat and muscle. Two people with the same BMI can have very different body compositions. It also does not indicate where fat is stored — and visceral fat (around the organs) is more harmful than subcutaneous fat. For a fuller picture, doctors use waist-to-height ratio, waist circumference, body fat percentage, blood pressure, and blood tests.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ EXAMPLES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Reference</span>
+        <h2 class="content-title">Healthy Ranges by <em>Height</em></h2>
+      </header>
+
+      <div class="tool-examples">
+        <table class="tool-examples__table">
+          <thead><tr><th>Height</th><th>Healthy weight range</th><th>Prime weight (BMI 22)</th></tr></thead>
+          <tbody>
+            <tr><td>150 cm (4′11″)</td><td>41.6 – 56.0 kg (91.7 – 123.5 lb)</td><td><strong>49.5 kg</strong></td></tr>
+            <tr><td>160 cm (5′3″)</td><td>47.4 – 63.7 kg (104.5 – 140.4 lb)</td><td><strong>56.3 kg</strong></td></tr>
+            <tr><td>170 cm (5′7″)</td><td>53.5 – 72.0 kg (117.9 – 158.7 lb)</td><td><strong>63.6 kg</strong></td></tr>
+            <tr><td>175 cm (5′9″)</td><td>56.7 – 76.3 kg (125.0 – 168.2 lb)</td><td><strong>67.4 kg</strong></td></tr>
+            <tr><td>180 cm (5′11″)</td><td>59.9 – 80.7 kg (132.1 – 177.9 lb)</td><td><strong>71.3 kg</strong></td></tr>
+            <tr><td>185 cm (6′1″)</td><td>63.3 – 85.2 kg (139.6 – 187.8 lb)</td><td><strong>75.3 kg</strong></td></tr>
+            <tr><td>190 cm (6′3″)</td><td>66.8 – 89.9 kg (147.3 – 198.2 lb)</td><td><strong>79.4 kg</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ USES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Context</span>
+        <h2 class="content-title">When BMI is <em>Useful</em></h2>
+      </header>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-stethoscope"></i></div>
+          <h3>Population screening</h3>
+          <p>BMI is a fast, cheap first pass at categorising weight across large groups. Useful in public health and clinical triage.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-file-medical"></i></div>
+          <h3>Medical forms</h3>
+          <p>Some insurance, surgery and clinical trial forms ask for BMI as part of routine data collection.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-chart-line"></i></div>
+          <h3>Tracking change</h3>
+          <p>If your weight is changing, BMI gives a consistent number to track over time — as long as height is fixed.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon red"><i class="fas fa-dumbbell"></i></div>
+          <h3>Not for athletes</h3>
+          <p>Muscle weighs more than fat. Many fit, muscular people have a BMI in the "overweight" range while being very healthy.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon purple"><i class="fas fa-baby"></i></div>
+          <h3>Not for children</h3>
+          <p>Children and teenagers need age- and sex-specific percentile charts, not the adult BMI scale.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-person-pregnant"></i></div>
+          <h3>Not during pregnancy</h3>
+          <p>BMI is not meaningful during pregnancy or breastfeeding. Doctors use different charts instead.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════ FAQ ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Questions</span>
+        <h2 class="content-title">BMI <em>FAQ</em></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-row">
+          <summary>What is a healthy BMI?</summary>
+          <div class="faq-row__answer"><p>For most adults, a BMI between <strong>18.5 and 24.9</strong> is considered healthy.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is BMI accurate for everyone?</summary>
+          <div class="faq-row__answer"><p>No. BMI does not distinguish between muscle and fat, and it is not reliable for athletes, pregnant women, children, or the elderly. Use it as a rough guide only.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How is BMI calculated?</summary>
+          <div class="faq-row__answer"><p>Metric: <code>BMI = kg ÷ m²</code>. Imperial: <code>BMI = (lb × 703) ÷ in²</code>.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is a prime BMI?</summary>
+          <div class="faq-row__answer"><p>A BMI of <strong>22</strong> is often cited as the midpoint of the healthy range and associated with the lowest risk in population studies. It is a common reference point, not a personal target.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Does BMI apply to children?</summary>
+          <div class="faq-row__answer"><p>Not to the standard adult scale. Children and teenagers use <strong>age- and sex-specific BMI percentile charts</strong>. Consult a paediatrician for accurate assessment.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Should I use BMI to decide if I need to lose weight?</summary>
+          <div class="faq-row__answer"><p>No. Speak to a doctor or dietitian. BMI is one data point among many and can be misleading on its own.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is BMI different for men and women?</summary>
+          <div class="faq-row__answer"><p>The formula is the same, but body composition differs. Some researchers suggest lower thresholds for some populations. The WHO scale used here applies to all adults.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is my weight and height stored anywhere?</summary>
+          <div class="faq-row__answer"><p>No. Everything runs in your browser. Nothing is uploaded, logged or shared. If you use a shared computer, clear the browser history to remove any URL state.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ RELATED ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Related Tools</span>
+        <h2 class="content-title">You Might Also <em>Need</em></h2>
+      </header>
+
+      <div class="similar-grid">
+        <a href="/unit-converter" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-ruler-combined"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Unit Converter</span>
+            <span class="similar-meta">kg, lb, cm, inches</span>
+          </span>
+        </a>
+        <a href="/age-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-cake-candles"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Age Calculator</span>
+            <span class="similar-meta">Exact age and zodiac</span>
+          </span>
+        </a>
+        <a href="/percentage-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-percent"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Percentage Calculator</span>
+            <span class="similar-meta">Six modes, live formula</span>
+          </span>
+        </a>
+        <a href="/" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calculator"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">All Calculators</span>
+            <span class="similar-meta">Back to hub</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <p class="last-updated">
+      <i class="fas fa-circle-check"></i>
+      Last updated: <time datetime="2026-01-01">1 January 2026</time>.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p>
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/legal.html">Privacy</a> ·
+      <a href="/legal.html">Terms</a> ·
+      <a href="https://land.me.uk/">Hub</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+  <script type="module" src="/js/calculator-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Discount Calculator — Free Online Sale Price Calculator | Tools</title>
+  <meta name="description" content="Free discount calculator. Work out the sale price, savings and original price from any percentage discount. Presets for 5–50% off. No signup." />
+  <meta name="keywords" content="discount calculator, sale price calculator, percent off calculator, original price calculator, how much is 20 off, reverse discount" />
+  <link rel="canonical" href="https://tools.land.me.uk/discount-calculator" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tools — Free Online Calculators" />
+  <meta property="og:url" content="https://tools.land.me.uk/discount-calculator" />
+  <meta property="og:title" content="Discount Calculator — Free, Instant, Private" />
+  <meta property="og:description" content="Sale price, savings and original price — from any percentage discount. Two modes." />
+  <meta property="og:image" content="https://tools.land.me.uk/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication",
+        "name": "Discount Calculator",
+        "url": "https://tools.land.me.uk/discount-calculator",
+        "description": "Free online discount calculator. Work out sale price, savings, and original price from any percentage discount.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+      { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Tools", "item": "https://tools.land.me.uk/" },
+        { "@type": "ListItem", "position": 2, "name": "Discount Calculator", "item": "https://tools.land.me.uk/discount-calculator" }
+      ]},
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "How do I calculate a discount?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Multiply the original price by the discount percentage, then divide by 100 to get the savings. Subtract the savings from the original price to get the sale price." } },
+        { "@type": "Question", "name": "How do I calculate the original price from the sale price?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Divide the sale price by (1 minus discount/100). For example, if the sale price is £80 and the discount was 20%, the original price was £80 ÷ 0.8 = £100." } },
+        { "@type": "Question", "name": "What is double discounting?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A double discount applies one discount on top of another. Two 20% discounts do not equal 40% off — they equal 36% off, because the second discount applies to the already-reduced price." } },
+        { "@type": "Question", "name": "Does the calculator handle tax?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. This calculator shows the discount only. Sales tax or VAT is applied after the discount in most jurisdictions, so add it on top of the sale price if needed." } },
+        { "@type": "Question", "name": "How do I work out a 3 for 2 deal?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A 3-for-2 offer is equivalent to a 33.3% discount on the total. Use mode 1 with a 33.33% discount to see the effective reduction." } }
+      ]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo"><span class="logo-mark"><i class="fas fa-calculator"></i></span><span class="logo-text">Tools<em>.land</em></span></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions"><a href="/#calculators" class="btn-nav-primary"><i class="fas fa-arrow-left"></i>&nbsp;All Calculators</a></div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span><span class="current">Discount Calculator</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge"><i class="fas fa-tags"></i> Two modes · Live · Private</div>
+      <h1>Discount <em>Calculator</em></h1>
+      <p>
+        Work out the sale price, the savings, or the original price from any
+        percentage discount. Presets for common sale percentages.
+      </p>
+    </section>
+
+    <!-- ══════════════ CALCULATOR ══════════════ -->
+    <section class="tool-wrap">
+      <div class="tool-card tool-card--flagship" data-tool="discount">
+
+        <!-- Mode tabs -->
+        <div class="tool-tabs">
+          <button class="tool-tab active" role="tab" aria-selected="true" data-mode="fromPrice">
+            <i class="fas fa-arrow-down"></i>
+            <span>From original price</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="findOriginal">
+            <i class="fas fa-arrow-up"></i>
+            <span>Find original price</span>
+          </button>
+        </div>
+
+        <!-- Panel: from original price -->
+        <div class="tool-panel" data-panel="fromPrice">
+          <p class="tool-panel__hint">An item is <em>X%</em> off. What do you pay?</p>
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Original price</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="0.01" min="0" id="discPrice" placeholder="80" autocomplete="off" />
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Discount</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="0.1" min="0" max="100" id="discPercent" placeholder="25" autocomplete="off" />
+                <span class="tool-field__suffix">%</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="tool-presets" role="group" aria-label="Discount presets">
+            <span class="tool-presets__label">Quick:</span>
+            <button type="button" class="tool-preset" data-disc-preset="5"  data-preset-target="discPercent">5%</button>
+            <button type="button" class="tool-preset" data-disc-preset="10" data-preset-target="discPercent">10%</button>
+            <button type="button" class="tool-preset" data-disc-preset="15" data-preset-target="discPercent">15%</button>
+            <button type="button" class="tool-preset" data-disc-preset="20" data-preset-target="discPercent">20%</button>
+            <button type="button" class="tool-preset" data-disc-preset="25" data-preset-target="discPercent">25%</button>
+            <button type="button" class="tool-preset" data-disc-preset="30" data-preset-target="discPercent">30%</button>
+            <button type="button" class="tool-preset" data-disc-preset="50" data-preset-target="discPercent">50%</button>
+          </div>
+        </div>
+
+        <!-- Panel: find original price -->
+        <div class="tool-panel hidden" data-panel="findOriginal">
+          <p class="tool-panel__hint">An item is now <em>$X</em> after a <em>Y%</em> discount. What was the original price?</p>
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Sale price</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="0.01" min="0" id="discSale" placeholder="60" autocomplete="off" />
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Discount received</span>
+              <span class="tool-field__inputwrap">
+                <input type="number" inputmode="decimal" step="0.1" min="0" max="99.99" id="discOrigPercent" placeholder="25" autocomplete="off" />
+                <span class="tool-field__suffix">%</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="tool-presets" role="group" aria-label="Discount presets">
+            <span class="tool-presets__label">Quick:</span>
+            <button type="button" class="tool-preset" data-disc-preset="10" data-preset-target="discOrigPercent">10%</button>
+            <button type="button" class="tool-preset" data-disc-preset="20" data-preset-target="discOrigPercent">20%</button>
+            <button type="button" class="tool-preset" data-disc-preset="25" data-preset-target="discOrigPercent">25%</button>
+            <button type="button" class="tool-preset" data-disc-preset="30" data-preset-target="discOrigPercent">30%</button>
+            <button type="button" class="tool-preset" data-disc-preset="50" data-preset-target="discOrigPercent">50%</button>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="tool-result tool-result--flagship" data-result aria-live="polite">
+          <span class="tool-result__label">Sale price</span>
+          <span class="tool-result__value" data-result-value>—</span>
+          <span class="tool-result__detail" data-result-detail></span>
+          <span class="tool-result__formula" data-result-formula></span>
+        </div>
+
+        <!-- Actions -->
+        <div class="tool-actions tool-actions--rich">
+          <button class="tool-btn tool-btn--primary" data-action="copy" type="button">
+            <i class="fas fa-copy"></i><span>Copy result</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="share" type="button">
+            <i class="fas fa-share-nodes"></i><span>Share link</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost tool-btn--danger" data-action="reset" type="button">
+            <i class="fas fa-rotate-left"></i><span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="wc-empty" data-disc-empty>
+          <i class="fas fa-tags"></i>
+          <p>Enter a price to see the sale price and savings.</p>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="wc-stats hidden" data-disc-stats>
+
+          <div class="wc-stat" data-disc-stat="original">
+            <span class="wc-stat__label">Original</span>
+            <span class="wc-stat__value" data-disc-value>—</span>
+          </div>
+          <div class="wc-stat wc-stat--primary" data-disc-stat="salePrice">
+            <span class="wc-stat__label">Sale price</span>
+            <span class="wc-stat__value" data-disc-value>—</span>
+          </div>
+          <div class="wc-stat" data-disc-stat="savings">
+            <span class="wc-stat__label">You save</span>
+            <span class="wc-stat__value" data-disc-value>—</span>
+          </div>
+          <div class="wc-stat" data-disc-stat="percent">
+            <span class="wc-stat__label">Discount</span>
+            <span class="wc-stat__value" data-disc-value>—</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ HOW IT WORKS ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">How It Works</span>
+        <h2 class="content-title">The Discount <em>Formulas</em></h2>
+      </header>
+      <div class="prose">
+        <h3>Mode 1 — From an original price</h3>
+        <p>You know the original price and the discount. To find the sale price:</p>
+        <p><code>Savings = (Price × Discount%) ÷ 100</code></p>
+        <p><code>Sale price = Price − Savings</code></p>
+        <p><strong>Example:</strong> £80 with 25% off → savings £20, sale price £60.</p>
+
+        <h3>Mode 2 — Find the original price</h3>
+        <p>You know the sale price and the discount received. To find the original price, divide by the remaining fraction:</p>
+        <p><code>Original = Sale price ÷ (1 − Discount/100)</code></p>
+        <p><strong>Example:</strong> sale price £60 after 25% off → original = £60 ÷ 0.75 = £80.</p>
+
+        <h3>Double discounts</h3>
+        <p>A common misconception: two 20% discounts do not equal 40% off. They equal <strong>36% off</strong>. The second discount applies to the already-reduced price. £100 → £80 → £64 = 36% total savings.</p>
+        <p>To work out a double discount manually, apply the first, then apply the second to the result. Or multiply the remaining fractions: (1 − 0.20) × (1 − 0.20) = 0.64, meaning you pay 64% of the original.</p>
+
+        <h3>3-for-2 and similar offers</h3>
+        <p>A 3-for-2 offer is equivalent to a <strong>33.33%</strong> discount on the total. Enter 33.33% in mode 1 to see the effective reduction.</p>
+
+        <h3>Tax</h3>
+        <p>This calculator does not include sales tax or VAT. In most countries tax is applied <em>after</em> the discount, so add it to the sale price if you want the final amount.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ EXAMPLES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Worked Examples</span>
+        <h2 class="content-title">Common <em>Discounts</em></h2>
+      </header>
+
+      <div class="tool-examples">
+        <table class="tool-examples__table">
+          <thead><tr><th>Original</th><th>Discount</th><th>Sale price</th><th>Saved</th></tr></thead>
+          <tbody>
+            <tr><td>£80</td><td>25%</td><td><strong>£60.00</strong></td><td>£20.00</td></tr>
+            <tr><td>£50</td><td>10%</td><td><strong>£45.00</strong></td><td>£5.00</td></tr>
+            <tr><td>£120</td><td>30%</td><td><strong>£84.00</strong></td><td>£36.00</td></tr>
+            <tr><td>£200</td><td>15%</td><td><strong>£170.00</strong></td><td>£30.00</td></tr>
+            <tr><td>£29.99</td><td>50%</td><td><strong>£14.99</strong></td><td>£15.00</td></tr>
+            <tr><td>£350</td><td>40%</td><td><strong>£210.00</strong></td><td>£140.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ USES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Everyday Uses</span>
+        <h2 class="content-title">When You'll <em>Need This</em></h2>
+      </header>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-cart-shopping"></i></div>
+          <h3>Online shopping</h3>
+          <p>Sale pages often show the discount percentage but not the final price. Work it out in one glance.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-money-bill-trend-up"></i></div>
+          <h3>Black Friday</h3>
+          <p>Compare two deals quickly: is 30% off a £200 item better than 40% off a £160 item? Do the maths.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon purple"><i class="fas fa-rotate-left"></i></div>
+          <h3>Reverse engineer a price</h3>
+          <p>You know the sale price and the discount. Find the original to check if the discount is real.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-percent"></i></div>
+          <h3>Stacked discounts</h3>
+          <p>An extra 10% off sale items is not the same as 10% off the original. Work out what you actually pay.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon red"><i class="fas fa-tag"></i></div>
+          <h3>Retail &amp; eBay</h3>
+          <p>Sellers price for markup and discount. Reverse the maths to set your own pricing.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-receipt"></i></div>
+          <h3>Budget planning</h3>
+          <p>See the real savings on your shopping list before you check out.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════ FAQ ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Questions</span>
+        <h2 class="content-title">Discount <em>FAQ</em></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-row">
+          <summary>How do I calculate a discount?</summary>
+          <div class="faq-row__answer"><p>Multiply the original price by the discount percentage, then divide by 100 to get the savings. Subtract the savings from the original price to get the sale price.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How do I calculate the original price from the sale price?</summary>
+          <div class="faq-row__answer"><p>Divide the sale price by (1 minus discount/100). For example, if the sale price is £80 and the discount was 20%, the original price was £80 ÷ 0.8 = £100. Use mode 2 above.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is double discounting?</summary>
+          <div class="faq-row__answer"><p>A double discount applies one discount on top of another. Two 20% discounts do not equal 40% off — they equal 36% off, because the second discount applies to the already-reduced price.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Does the calculator handle tax?</summary>
+          <div class="faq-row__answer"><p>No. This calculator shows the discount only. Sales tax or VAT is applied after the discount in most jurisdictions, so add it on top of the sale price if needed.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How do I work out a 3 for 2 deal?</summary>
+          <div class="faq-row__answer"><p>A 3-for-2 offer is equivalent to a 33.33% discount on the total. Use mode 1 with a 33.33% discount to see the effective reduction.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is this the same as the percentage calculator?</summary>
+          <div class="faq-row__answer"><p>It is related but focused on shopping. The <a href="/percentage-calculator">percentage calculator</a> has six general-purpose modes. This one is optimised for discounts, with presets and the reverse mode built in.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ RELATED ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Related Tools</span>
+        <h2 class="content-title">You Might Also <em>Need</em></h2>
+      </header>
+
+      <div class="similar-grid">
+        <a href="/percentage-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-percent"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Percentage Calculator</span>
+            <span class="similar-meta">Six modes, live formula</span>
+          </span>
+        </a>
+        <a href="/tip-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-receipt"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Tip Calculator</span>
+            <span class="similar-meta">Tip and split the bill</span>
+          </span>
+        </a>
+        <a href="/loan-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-building-columns"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Loan Calculator</span>
+            <span class="similar-meta">Monthly payment and interest</span>
+          </span>
+        </a>
+        <a href="/" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calculator"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">All Calculators</span>
+            <span class="similar-meta">Back to hub</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <p class="last-updated">
+      <i class="fas fa-circle-check"></i>
+      Last updated: <time datetime="2026-01-01">1 January 2026</time>.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p>
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/legal.html">Privacy</a> ·
+      <a href="/legal.html">Terms</a> ·
+      <a href="https://land.me.uk/">Hub</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+  <script type="module" src="/js/calculator-page.js"></script>
+</body>
+</html>

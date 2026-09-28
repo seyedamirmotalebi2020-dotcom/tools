@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Loan Calculator — Free Monthly Payment &amp; Interest Calculator | Tools</title>
+  <meta name="description" content="Free loan calculator. Work out monthly payments, total interest and amortization for any loan or mortgage. Includes a full yearly payment schedule." />
+  <meta name="keywords" content="loan calculator, mortgage calculator, monthly payment calculator, amortization calculator, loan interest calculator, car loan calculator" />
+  <link rel="canonical" href="https://tools.land.me.uk/loan-calculator" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tools — Free Online Calculators" />
+  <meta property="og:url" content="https://tools.land.me.uk/loan-calculator" />
+  <meta property="og:title" content="Loan Calculator — Free, Instant, Amortization Schedule" />
+  <meta property="og:description" content="Monthly payment, total interest, and full yearly amortization for any loan." />
+  <meta property="og:image" content="https://tools.land.me.uk/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication",
+        "name": "Loan Calculator",
+        "url": "https://tools.land.me.uk/loan-calculator",
+        "description": "Free online loan calculator. Monthly payment, total interest, and full amortization schedule for any loan or mortgage.",
+        "applicationCategory": "FinanceApplication", "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+      { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Tools", "item": "https://tools.land.me.uk/" },
+        { "@type": "ListItem", "position": 2, "name": "Loan Calculator", "item": "https://tools.land.me.uk/loan-calculator" }
+      ]},
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "How is a monthly loan payment calculated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The monthly payment uses the amortization formula: M = P × r(1+r)^n / ((1+r)^n − 1), where P is the principal, r is the monthly interest rate, and n is the number of monthly payments." } },
+        { "@type": "Question", "name": "What is amortization?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Amortization is the process of paying off a loan through regular payments. Early payments are mostly interest; later payments are mostly principal." } },
+        { "@type": "Question", "name": "Does this calculator include fees or insurance?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. It only includes principal, interest and term. Arrangement fees, insurance, taxes and early repayment charges are not included." } },
+        { "@type": "Question", "name": "Should I choose a shorter or longer term?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A shorter term means higher monthly payments but much less interest overall. A longer term lowers the monthly payment but costs more in total." } },
+        { "@type": "Question", "name": "What is the difference between interest rate and APR?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The interest rate is the cost of borrowing the principal only. APR includes fees and other charges, so it is always equal to or higher than the interest rate." } },
+        { "@type": "Question", "name": "Does this calculator handle variable rates?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. It assumes a fixed rate for the whole term. For variable rate loans, use the current rate as a starting point and adjust as the rate changes." } }
+      ]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo"><span class="logo-mark"><i class="fas fa-calculator"></i></span><span class="logo-text">Tools<em>.land</em></span></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions"><a href="/#calculators" class="btn-nav-primary"><i class="fas fa-arrow-left"></i>&nbsp;All Calculators</a></div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span><span class="current">Loan Calculator</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge"><i class="fas fa-building-columns"></i> Amortization · Schedule · Private</div>
+      <h1>Loan <em>Calculator</em></h1>
+      <p>
+        Work out the monthly payment, total interest and full amortization
+        schedule for any loan or mortgage.
+      </p>
+    </section>
+
+    <!-- ══════════════ CALCULATOR ══════════════ -->
+    <section class="tool-wrap">
+      <div class="tool-card tool-card--flagship" data-tool="loan">
+
+        <div class="tool-inputs">
+          <label class="tool-field">
+            <span class="tool-field__label">Loan amount</span>
+            <span class="tool-field__inputwrap">
+              <input type="number" inputmode="decimal" step="any" min="0" id="loanAmount" placeholder="250000" autocomplete="off" />
+            </span>
+          </label>
+          <label class="tool-field">
+            <span class="tool-field__label">Annual interest rate</span>
+            <span class="tool-field__inputwrap">
+              <input type="number" inputmode="decimal" step="0.01" min="0" id="loanRate" placeholder="5.5" autocomplete="off" />
+              <span class="tool-field__suffix">%</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="tool-inputs" style="margin-top: var(--sp-3);">
+          <label class="tool-field">
+            <span class="tool-field__label">Term</span>
+            <span class="tool-field__inputwrap">
+              <input type="number" inputmode="numeric" step="1" min="1" max="50" id="loanYears" placeholder="25" autocomplete="off" />
+              <span class="tool-field__suffix" style="font-family: 'DM Sans'; font-style: normal; font-size: 0.82rem; font-weight: 500; right: 1rem;">years</span>
+            </span>
+          </label>
+        </div>
+
+        <!-- Presets -->
+        <div class="tool-presets" role="group" aria-label="Loan presets">
+          <span class="tool-presets__label">Example:</span>
+          <button type="button" class="tool-preset" data-loan-preset="mortgage25"><i class="fas fa-house"></i> Mortgage 25y</button>
+          <button type="button" class="tool-preset" data-loan-preset="mortgage30"><i class="fas fa-house"></i> Mortgage 30y</button>
+          <button type="button" class="tool-preset" data-loan-preset="car5"><i class="fas fa-car"></i> Car 5y</button>
+          <button type="button" class="tool-preset" data-loan-preset="car3"><i class="fas fa-car"></i> Car 3y</button>
+          <button type="button" class="tool-preset" data-loan-preset="personal"><i class="fas fa-user"></i> Personal 3y</button>
+          <button type="button" class="tool-preset" data-loan-preset="student"><i class="fas fa-graduation-cap"></i> Student 10y</button>
+        </div>
+
+        <!-- Result -->
+        <div class="tool-result tool-result--flagship" data-result aria-live="polite" style="margin-top: var(--sp-3);">
+          <span class="tool-result__label">Monthly payment</span>
+          <span class="tool-result__value" data-result-value>—</span>
+          <span class="tool-result__detail" data-result-detail></span>
+          <span class="tool-result__formula" data-result-formula></span>
+        </div>
+
+        <!-- Actions -->
+        <div class="tool-actions tool-actions--rich">
+          <button class="tool-btn tool-btn--primary" data-action="copy" type="button">
+            <i class="fas fa-copy"></i><span>Copy result</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="share" type="button">
+            <i class="fas fa-share-nodes"></i><span>Share link</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost tool-btn--danger" data-action="reset" type="button">
+            <i class="fas fa-rotate-left"></i><span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="wc-empty" data-loan-empty>
+          <i class="fas fa-building-columns"></i>
+          <p>Enter a loan amount, rate and term to see your monthly payment.</p>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="wc-stats hidden" data-loan-stats>
+
+          <div class="wc-stat" data-loan-stat="principal">
+            <span class="wc-stat__label">Principal</span>
+            <span class="wc-stat__value" data-loan-value>—</span>
+          </div>
+          <div class="wc-stat wc-stat--primary" data-loan-stat="totalInterest">
+            <span class="wc-stat__label">Total interest</span>
+            <span class="wc-stat__value" data-loan-value>—</span>
+          </div>
+          <div class="wc-stat" data-loan-stat="totalPaid">
+            <span class="wc-stat__label">Total paid</span>
+            <span class="wc-stat__value" data-loan-value>—</span>
+          </div>
+          <div class="wc-stat" data-loan-stat="interestPercent">
+            <span class="wc-stat__label">Interest as %</span>
+            <span class="wc-stat__value" data-loan-value>—</span>
+          </div>
+
+          <div class="wc-stat" data-loan-stat="months">
+            <span class="wc-stat__label">Payments</span>
+            <span class="wc-stat__value" data-loan-value>—</span>
+          </div>
+          <div class="wc-stat" data-loan-stat="firstPayment">
+            <span class="wc-stat__label">First: int / prin</span>
+            <span class="wc-stat__value" data-loan-value>—</span>
+          </div>
+          <div class="wc-stat" data-loan-stat="lastPayment">
+            <span class="wc-stat__label">Last: int / prin</span>
+            <span class="wc-stat__value" data-loan-value>—</span>
+          </div>
+
+        </div>
+
+        <!-- Amortization schedule -->
+        <div class="loan-schedule hidden" data-loan-schedule>
+          <div class="loan-schedule__head">
+            <span><i class="fas fa-table-list"></i> Yearly amortization schedule</span>
+          </div>
+          <div class="loan-schedule__wrap">
+            <table class="loan-schedule__table">
+              <thead>
+                <tr>
+                  <th>Period</th>
+                  <th>Interest paid</th>
+                  <th>Principal paid</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody data-loan-schedule-body></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Financial disclaimer -->
+    <aside class="caution-banner" role="note" aria-label="Financial disclaimer">
+      <div class="caution-banner__icon" aria-hidden="true"><i class="fas fa-triangle-exclamation"></i></div>
+      <div class="caution-banner__body">
+        <div class="caution-banner__title">Financial Disclaimer</div>
+        <p class="caution-banner__text">
+          This loan calculator is for general information only and is <strong>not financial advice</strong>.
+          It assumes a fixed interest rate for the entire term and does not include fees, insurance, taxes or
+          early repayment charges. Rates and terms vary. Always confirm the actual figures with your lender
+          before making any decision.
+        </p>
+      </div>
+    </aside>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ HOW IT WORKS ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">How It Works</span>
+        <h2 class="content-title">The Loan <em>Formula</em></h2>
+      </header>
+      <div class="prose">
+        <h3>The monthly payment formula</h3>
+        <p>The monthly payment is calculated using the standard amortization formula:</p>
+        <p><code>M = P × r(1+r)ⁿ ÷ ((1+r)ⁿ − 1)</code></p>
+        <ul>
+          <li><strong>M</strong> = monthly payment</li>
+          <li><strong>P</strong> = principal (loan amount)</li>
+          <li><strong>r</strong> = monthly interest rate (annual rate ÷ 12 ÷ 100)</li>
+          <li><strong>n</strong> = total number of monthly payments (years × 12)</li>
+        </ul>
+
+        <h3>Amortization</h3>
+        <p>Each payment has two parts: interest and principal. The interest is calculated as <code>remaining balance × monthly rate</code>. Whatever is left after interest goes toward the principal. Early in the loan, most of the payment is interest. Over time, the balance falls, so less interest accrues each month and more goes to principal. That is why the balance drops slowly at first and faster later.</p>
+
+        <h3>Total interest</h3>
+        <p>The total interest is the difference between the total amount paid over the full term and the original principal. A £250,000 mortgage at 5.5% over 25 years costs roughly £208,000 in interest — nearly as much as the loan itself.</p>
+
+        <h3>What this calculator does not include</h3>
+        <ul>
+          <li><strong>Fees</strong> — arrangement fees, broker fees, valuation fees</li>
+          <li><strong>Insurance</strong> — mortgage protection, life insurance, PPI</li>
+          <li><strong>Taxes</strong> — property taxes, stamp duty</li>
+          <li><strong>Early repayment charges</strong> — penalties for paying off early</li>
+          <li><strong>Variable rates</strong> — the calculator assumes a fixed rate</li>
+        </ul>
+
+        <h3>Interest rate vs APR</h3>
+        <p>The <strong>interest rate</strong> is the cost of borrowing the principal. The <strong>APR</strong> (Annual Percentage Rate) includes fees and other charges, so it is always equal to or higher than the interest rate. When comparing loans, compare APRs — not interest rates.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ EXAMPLES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Reference</span>
+        <h2 class="content-title">Common <em>Loans</em></h2>
+      </header>
+
+      <div class="tool-examples">
+        <table class="tool-examples__table">
+          <thead><tr><th>Loan</th><th>Amount</th><th>Rate</th><th>Term</th><th>Monthly</th></tr></thead>
+          <tbody>
+            <tr><td>Mortgage</td><td>£250,000</td><td>5.5%</td><td>25 yr</td><td><strong>£1,535.22</strong></td></tr>
+            <tr><td>Mortgage</td><td>£300,000</td><td>6.0%</td><td>30 yr</td><td><strong>£1,798.65</strong></td></tr>
+            <tr><td>Car loan</td><td>£25,000</td><td>6.5%</td><td>5 yr</td><td><strong>£489.13</strong></td></tr>
+            <tr><td>Car loan</td><td>£18,000</td><td>5.0%</td><td>3 yr</td><td><strong>£539.50</strong></td></tr>
+            <tr><td>Personal loan</td><td>£10,000</td><td>9.0%</td><td>3 yr</td><td><strong>£318.00</strong></td></tr>
+            <tr><td>Student loan</td><td>£40,000</td><td>5.0%</td><td>10 yr</td><td><strong>£424.27</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ USES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Everyday Uses</span>
+        <h2 class="content-title">When You'll <em>Need This</em></h2>
+      </header>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-house"></i></div>
+          <h3>Mortgages</h3>
+          <p>Compare lenders, terms and monthly costs. See exactly what 25 years vs 30 years means for your budget.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-car"></i></div>
+          <h3>Car finance</h3>
+          <p>Work out what you can afford before you walk into a dealership. Compare dealer finance to bank loans.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon purple"><i class="fas fa-user"></i></div>
+          <h3>Personal loans</h3>
+          <p>Consolidating debt, funding a wedding, or paying for home improvements — work out the true monthly cost.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Student loans</h3>
+          <p>Understand how much you will repay over the standard 10-year term before you commit.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon red"><i class="fas fa-rotate-left"></i></div>
+          <h3>Refinancing</h3>
+          <p>Compare a new offer to your existing loan. See how much you save by refinancing — or whether it is worth it.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-piggy-bank"></i></div>
+          <h3>Overpayment planning</h3>
+          <p>See how much interest you would save by paying extra each month. Even small overpayments add up over decades.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════ FAQ ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Questions</span>
+        <h2 class="content-title">Loan <em>FAQ</em></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-row">
+          <summary>How is a monthly loan payment calculated?</summary>
+          <div class="faq-row__answer"><p>The monthly payment uses the amortization formula: <code>M = P × r(1+r)ⁿ / ((1+r)ⁿ − 1)</code>, where P is the principal, r is the monthly interest rate, and n is the number of monthly payments.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is amortization?</summary>
+          <div class="faq-row__answer"><p>Amortization is the process of paying off a loan through regular payments. Early payments are mostly interest; later payments are mostly principal. The yearly schedule above shows exactly how the split changes.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Does this calculator include fees or insurance?</summary>
+          <div class="faq-row__answer"><p>No. It only includes principal, interest and term. Arrangement fees, insurance, taxes and early repayment charges are not included.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Should I choose a shorter or longer term?</summary>
+          <div class="faq-row__answer"><p>A shorter term means higher monthly payments but much less interest overall. A longer term lowers the monthly payment but costs more in total. Choose based on what you can comfortably afford — and remember that most lenders allow overpayments, which is often better than choosing a shorter term upfront.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is the difference between interest rate and APR?</summary>
+          <div class="faq-row__answer"><p>The interest rate is the cost of borrowing the principal only. APR includes fees and other charges, so it is always equal to or higher than the interest rate. When comparing loans, use the APR.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Does this calculator handle variable rates?</summary>
+          <div class="faq-row__answer"><p>No. It assumes a fixed rate for the whole term. For variable rate loans, use the current rate as a starting point and adjust as the rate changes.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How much does overpaying save?</summary>
+          <div class="faq-row__answer"><p>Every extra payment goes straight off the principal, which reduces the interest charged in every following month. On a £250,000 mortgage at 5.5% over 25 years, an extra £100/month would save roughly £35,000 in interest and pay off the loan about 4 years early. Use the calculator twice — once with the extra added to the payment — to compare.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is my loan amount stored anywhere?</summary>
+          <div class="faq-row__answer"><p>No. Everything runs in your browser. Nothing is uploaded, logged or shared.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ RELATED ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Related Tools</span>
+        <h2 class="content-title">You Might Also <em>Need</em></h2>
+      </header>
+
+      <div class="similar-grid">
+        <a href="/percentage-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-percent"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Percentage Calculator</span>
+            <span class="similar-meta">Six modes, live formula</span>
+          </span>
+        </a>
+        <a href="/discount-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-tags"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Discount Calculator</span>
+            <span class="similar-meta">Sale price and savings</span>
+          </span>
+        </a>
+        <a href="/date-difference" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calendar-days"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Date Difference</span>
+            <span class="similar-meta">Days between any two dates</span>
+          </span>
+        </a>
+        <a href="/" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calculator"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">All Calculators</span>
+            <span class="similar-meta">Back to hub</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <p class="last-updated">
+      <i class="fas fa-circle-check"></i>
+      Last updated: <time datetime="2026-01-01">1 January 2026</time>.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p>
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/legal.html">Privacy</a> ·
+      <a href="/legal.html">Terms</a> ·
+      <a href="https://land.me.uk/">Hub</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+  <script type="module" src="/js/calculator-page.js"></script>
+</body>
+</html>

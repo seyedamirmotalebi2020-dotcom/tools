@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>Tip Calculator — Free Online Bill Split &amp; Tip Calculator | Tools</title>
+  <meta name="description" content="Free tip calculator. Work out the tip, total, and split the bill between any number of people. Presets for 10%, 15%, 18%, 20% and 25%. No signup." />
+  <meta name="keywords" content="tip calculator, bill split calculator, restaurant tip, how much to tip, gratuity calculator, split the bill" />
+  <link rel="canonical" href="https://tools.land.me.uk/tip-calculator" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tools — Free Online Calculators" />
+  <meta property="og:url" content="https://tools.land.me.uk/tip-calculator" />
+  <meta property="og:title" content="Tip Calculator — Free, Instant, Private" />
+  <meta property="og:description" content="Tip, total and split the bill between any number of people. Presets for common tip percentages." />
+  <meta property="og:image" content="https://tools.land.me.uk/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication",
+        "name": "Tip Calculator",
+        "url": "https://tools.land.me.uk/tip-calculator",
+        "description": "Free online tip calculator. Work out the tip, total, and split the bill between any number of people.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+      { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Tools", "item": "https://tools.land.me.uk/" },
+        { "@type": "ListItem", "position": 2, "name": "Tip Calculator", "item": "https://tools.land.me.uk/tip-calculator" }
+      ]},
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "How much should I tip?",
+          "acceptedAnswer": { "@type": "Answer", "text": "In the US, 15–20% is standard for restaurants. In the UK and Europe, 10% is common or service is already included. Always check whether a service charge is already on the bill." } },
+        { "@type": "Question", "name": "How do I split the tip between people?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Enter the number of people in the split field. The calculator shows each person's share of the total, including tip." } },
+        { "@type": "Question", "name": "Should I tip on the pre-tax or post-tax amount?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Either is acceptable. Most people tip on the post-tax total, but tipping on the pre-tax amount is also common and considered perfectly reasonable." } },
+        { "@type": "Question", "name": "What is rounding up?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Rounding up increases the total to the nearest whole currency unit. On a $47.50 bill, rounding up makes it $48.00. The extra amount goes to the tip." } },
+        { "@type": "Question", "name": "Do I tip on takeaway or delivery?",
+          "acceptedAnswer": { "@type": "Answer", "text": "For takeaway, tipping is optional. For delivery, 10–15% is common in the US and generous in most other countries. Delivery drivers often rely on tips more than restaurant staff." } },
+        { "@type": "Question", "name": "Is service included?",
+          "acceptedAnswer": { "@type": "Answer", "text": "In many European and UK restaurants, a discretionary service charge of 10–12.5% is already added. Check the bill before adding an extra tip." } }
+      ]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo"><span class="logo-mark"><i class="fas fa-calculator"></i></span><span class="logo-text">Tools<em>.land</em></span></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions"><a href="/#calculators" class="btn-nav-primary"><i class="fas fa-arrow-left"></i>&nbsp;All Calculators</a></div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span><span class="current">Tip Calculator</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge"><i class="fas fa-receipt"></i> Live · Instant · Private</div>
+      <h1>Tip <em>Calculator</em></h1>
+      <p>
+        Work out the tip, see the total, and split the bill between any number
+        of people. Choose a preset or enter your own percentage.
+      </p>
+    </section>
+
+    <!-- ══════════════ CALCULATOR ══════════════ -->
+    <section class="tool-wrap">
+      <div class="tool-card tool-card--flagship" data-tool="tip">
+
+        <div class="tool-inputs">
+          <label class="tool-field">
+            <span class="tool-field__label">Bill amount</span>
+            <span class="tool-field__inputwrap">
+              <input type="number" inputmode="decimal" step="0.01" min="0" id="tipBill" placeholder="47.50" autocomplete="off" />
+            </span>
+          </label>
+          <label class="tool-field">
+            <span class="tool-field__label">Tip percentage</span>
+            <span class="tool-field__inputwrap">
+              <input type="number" inputmode="decimal" step="0.1" min="0" id="tipPercent" placeholder="15" autocomplete="off" />
+              <span class="tool-field__suffix">%</span>
+            </span>
+          </label>
+        </div>
+
+        <!-- Tip presets -->
+        <div class="tool-presets" role="group" aria-label="Tip percentage presets">
+          <span class="tool-presets__label">Quick tip:</span>
+          <button type="button" class="tool-preset" data-tip-preset="0">0%</button>
+          <button type="button" class="tool-preset" data-tip-preset="10">10%</button>
+          <button type="button" class="tool-preset" data-tip-preset="15">15%</button>
+          <button type="button" class="tool-preset" data-tip-preset="18">18%</button>
+          <button type="button" class="tool-preset" data-tip-preset="20">20%</button>
+          <button type="button" class="tool-preset" data-tip-preset="25">25%</button>
+        </div>
+
+        <!-- Split -->
+        <div class="tool-inputs" style="margin-top: var(--sp-3);">
+          <label class="tool-field">
+            <span class="tool-field__label">Split between</span>
+            <span class="tool-field__inputwrap">
+              <input type="number" inputmode="numeric" min="1" step="1" id="tipSplit" placeholder="1" autocomplete="off" />
+              <span class="tool-field__suffix" style="font-family: 'DM Sans'; font-style: normal; font-size: 0.82rem; font-weight: 500; right: 1rem;">people</span>
+            </span>
+          </label>
+          <label class="tool-field" style="justify-content: flex-end;">
+            <span class="tool-field__label" style="visibility: hidden;">Round up</span>
+            <span class="tool-toggle-inline">
+              <input type="checkbox" id="tipRound" />
+              <label for="tipRound">
+                <i class="fas fa-circle-up"></i>
+                Round up total
+              </label>
+            </span>
+          </label>
+        </div>
+
+        <!-- Split presets -->
+        <div class="tool-presets" role="group" aria-label="Split presets" style="margin-top: 0.6rem;">
+          <span class="tool-presets__label">Split:</span>
+          <button type="button" class="tool-preset" data-split-preset="1">1</button>
+          <button type="button" class="tool-preset" data-split-preset="2">2</button>
+          <button type="button" class="tool-preset" data-split-preset="3">3</button>
+          <button type="button" class="tool-preset" data-split-preset="4">4</button>
+          <button type="button" class="tool-preset" data-split-preset="5">5</button>
+          <button type="button" class="tool-preset" data-split-preset="6">6</button>
+        </div>
+
+        <!-- Result -->
+        <div class="tool-result tool-result--flagship" data-result aria-live="polite">
+          <span class="tool-result__label">Total</span>
+          <span class="tool-result__value" data-result-value>—</span>
+          <span class="tool-result__detail" data-result-detail></span>
+          <span class="tool-result__formula" data-result-formula></span>
+        </div>
+
+        <!-- Actions -->
+        <div class="tool-actions tool-actions--rich">
+          <button class="tool-btn tool-btn--primary" data-action="copy" type="button">
+            <i class="fas fa-copy"></i><span>Copy result</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="share" type="button">
+            <i class="fas fa-share-nodes"></i><span>Share link</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost tool-btn--danger" data-action="reset" type="button">
+            <i class="fas fa-rotate-left"></i><span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="wc-empty" data-tip-empty>
+          <i class="fas fa-receipt"></i>
+          <p>Enter a bill amount to see the tip, total and split.</p>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="wc-stats hidden" data-tip-stats>
+
+          <div class="wc-stat" data-tip-stat="tip">
+            <span class="wc-stat__label">Tip</span>
+            <span class="wc-stat__value" data-tip-value>—</span>
+          </div>
+          <div class="wc-stat wc-stat--primary" data-tip-stat="total">
+            <span class="wc-stat__label">Total</span>
+            <span class="wc-stat__value" data-tip-value>—</span>
+          </div>
+          <div class="wc-stat" data-tip-stat="perPerson">
+            <span class="wc-stat__label">Per person</span>
+            <span class="wc-stat__value" data-tip-value>—</span>
+          </div>
+          <div class="wc-stat" data-tip-stat="tipPerPerson">
+            <span class="wc-stat__label">Tip each</span>
+            <span class="wc-stat__value" data-tip-value>—</span>
+          </div>
+
+          <div class="wc-stat" data-tip-stat="effectivePercent">
+            <span class="wc-stat__label">Effective tip</span>
+            <span class="wc-stat__value" data-tip-value>—</span>
+          </div>
+          <div class="wc-stat" data-tip-stat="splitCount">
+            <span class="wc-stat__label">Split</span>
+            <span class="wc-stat__value" data-tip-value>—</span>
+          </div>
+          <div class="wc-stat hidden" data-tip-stat="roundingAdd">
+            <span class="wc-stat__label">Rounded up by</span>
+            <span class="wc-stat__value" data-tip-value>—</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ HOW IT WORKS ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">How It Works</span>
+        <h2 class="content-title">The Tip <em>Formula</em></h2>
+      </header>
+      <div class="prose">
+        <h3>Tip amount</h3>
+        <p>The tip is the bill multiplied by the tip percentage, divided by 100.</p>
+        <p><code>Tip = (Bill × Tip%) ÷ 100</code></p>
+
+        <h3>Total</h3>
+        <p>The total is the bill plus the tip.</p>
+        <p><code>Total = Bill + Tip</code></p>
+
+        <h3>Split between N people</h3>
+        <p>If the bill is split, the total is divided by the number of people. The tip is also divided separately, so you can see how much of each person's share goes to the tip.</p>
+        <p><code>Per person = Total ÷ Split</code></p>
+
+        <h3>Rounding up</h3>
+        <p>If you enable the round-up option, the total is increased to the nearest whole currency unit. The extra amount is added to the tip, so the tip percentage effectively rises. On a $47.50 bill at 15%, the tip is $7.13 and the total is $54.63. Rounded up, the total becomes $55.00 and the tip becomes $7.50 — an effective tip of 15.79%.</p>
+
+        <h3>Effective tip percentage</h3>
+        <p>When rounding up, the tip percentage you entered is no longer exact. The calculator shows the real percentage that the rounded tip represents. Useful when you want to keep the tip generous without going overboard.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ EXAMPLES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Reference</span>
+        <h2 class="content-title">Common <em>Tips</em></h2>
+      </header>
+
+      <div class="tool-examples">
+        <table class="tool-examples__table">
+          <thead><tr><th>Bill</th><th>Tip %</th><th>Tip</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td>$20.00</td><td>10%</td><td>$2.00</td><td><strong>$22.00</strong></td></tr>
+            <tr><td>$47.50</td><td>15%</td><td>$7.13</td><td><strong>$54.63</strong></td></tr>
+            <tr><td>$47.50</td><td>18%</td><td>$8.55</td><td><strong>$56.05</strong></td></tr>
+            <tr><td>$47.50</td><td>20%</td><td>$9.50</td><td><strong>$57.00</strong></td></tr>
+            <tr><td>$100.00</td><td>20%</td><td>$20.00</td><td><strong>$120.00</strong></td></tr>
+            <tr><td>$250.00</td><td>15%</td><td>$37.50</td><td><strong>$287.50</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ USES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Everyday Uses</span>
+        <h2 class="content-title">When You'll <em>Need This</em></h2>
+      </header>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-utensils"></i></div>
+          <h3>Restaurants</h3>
+          <p>Standard 15–20% tip in the US, 10% in the UK and most of Europe.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-motorcycle"></i></div>
+          <h3>Delivery</h3>
+          <p>10–15% for delivery drivers. They often rely on tips more than restaurant staff.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon purple"><i class="fas fa-mug-hot"></i></div>
+          <h3>Cafés &amp; bars</h3>
+          <p>Small tips for coffee, larger for table service or cocktails. Many bars add a service charge automatically.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-scissors"></i></div>
+          <h3>Salons &amp; taxis</h3>
+          <p>10–15% is standard for hairdressers, barbers, taxis and hotel service.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon red"><i class="fas fa-users"></i></div>
+          <h3>Group dining</h3>
+          <p>Split the bill and tip evenly. The calculator shows each person's share including tip.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-globe"></i></div>
+          <h3>Travel tipping</h3>
+          <p>Different countries expect different amounts. Some include service; others do not. Check before you add.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════ FAQ ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Questions</span>
+        <h2 class="content-title">Tip <em>FAQ</em></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-row">
+          <summary>How much should I tip?</summary>
+          <div class="faq-row__answer"><p>In the US, 15–20% is standard for restaurants. In the UK and Europe, 10% is common or service is already included. Always check whether a service charge is already on the bill.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How do I split the tip between people?</summary>
+          <div class="faq-row__answer"><p>Enter the number of people in the split field. The calculator shows each person's share of the total, including tip.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Should I tip on the pre-tax or post-tax amount?</summary>
+          <div class="faq-row__answer"><p>Either is acceptable. Most people tip on the post-tax total, but tipping on the pre-tax amount is also common and considered perfectly reasonable.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What is rounding up?</summary>
+          <div class="faq-row__answer"><p>Rounding up increases the total to the nearest whole currency unit. On a $47.50 bill, rounding up makes it $48.00. The extra amount goes to the tip.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Do I tip on takeaway or delivery?</summary>
+          <div class="faq-row__answer"><p>For takeaway, tipping is optional. For delivery, 10–15% is common in the US and generous in most other countries. Delivery drivers often rely on tips more than restaurant staff.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is service included?</summary>
+          <div class="faq-row__answer"><p>In many European and UK restaurants, a discretionary service charge of 10–12.5% is already added. Check the bill before adding an extra tip.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is my bill amount stored anywhere?</summary>
+          <div class="faq-row__answer"><p>No. The calculation runs entirely in your browser. Nothing is uploaded, logged or shared.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ RELATED ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Related Tools</span>
+        <h2 class="content-title">You Might Also <em>Need</em></h2>
+      </header>
+
+      <div class="similar-grid">
+        <a href="/percentage-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-percent"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Percentage Calculator</span>
+            <span class="similar-meta">Six modes, live formula</span>
+          </span>
+        </a>
+        <a href="/discount-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-tags"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Discount Calculator</span>
+            <span class="similar-meta">Sale price and savings</span>
+          </span>
+        </a>
+        <a href="/loan-calculator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-building-columns"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Loan Calculator</span>
+            <span class="similar-meta">Monthly payment and interest</span>
+          </span>
+        </a>
+        <a href="/" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calculator"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">All Calculators</span>
+            <span class="similar-meta">Back to hub</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <p class="last-updated">
+      <i class="fas fa-circle-check"></i>
+      Last updated: <time datetime="2026-01-01">1 January 2026</time>.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p>
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/legal.html">Privacy</a> ·
+      <a href="/legal.html">Terms</a> ·
+      <a href="https://land.me.uk/">Hub</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+  <script type="module" src="/js/calculator-page.js"></script>
+</body>
+</html>

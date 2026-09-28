@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <title>QR Code Generator — Free Online QR Code Maker | Tools</title>
+  <meta name="description" content="Free QR code generator. Create QR codes for URLs, text, Wi-Fi, email, SMS and vCards. Download as PNG or SVG. Runs in your browser — nothing uploaded." />
+  <meta name="keywords" content="qr code generator, free qr code maker, create qr code, qr code for url, wifi qr code, vcard qr code, qr code png, qr code svg" />
+  <link rel="canonical" href="https://tools.land.me.uk/qr-generator" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tools — Free Online Calculators" />
+  <meta property="og:url" content="https://tools.land.me.uk/qr-generator" />
+  <meta property="og:title" content="QR Code Generator — Free, Private, Offline-Capable" />
+  <meta property="og:description" content="Create QR codes for URLs, Wi-Fi, vCards and more. Download PNG or SVG." />
+  <meta property="og:image" content="https://tools.land.me.uk/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+
+  <script src="/js/vendor/qrcode.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication",
+        "name": "QR Code Generator",
+        "url": "https://tools.land.me.uk/qr-generator",
+        "description": "Free online QR code generator. Create QR codes for URLs, text, Wi-Fi, email, SMS and vCards. Download as PNG or SVG.",
+        "applicationCategory": "UtilityApplication", "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+      { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Tools", "item": "https://tools.land.me.uk/" },
+        { "@type": "ListItem", "position": 2, "name": "QR Code Generator", "item": "https://tools.land.me.uk/qr-generator" }
+      ]},
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "Are the QR codes permanent?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. This generator encodes your data directly into the image. The QR code is a static, self-contained image and does not rely on any server or redirect. It will keep working as long as the data it encodes remains valid." } },
+        { "@type": "Question", "name": "What error correction level should I use?",
+          "acceptedAnswer": { "@type": "Answer", "text": "M (15%) is a good default. Use H (30%) if you plan to print at small sizes, print on uneven surfaces, or overlay a logo. Higher levels make the QR code denser but more tolerant of damage." } },
+        { "@type": "Question", "name": "Can I use QR codes commercially?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. QR codes are an open standard (ISO/IEC 18004). The codes you generate here are yours to use freely, including for commercial purposes." } },
+        { "@type": "Question", "name": "How big should the printed QR code be?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A common rule of thumb: the QR code should be at least one tenth the scanning distance. For scanning from 30 cm, make it at least 3 cm wide. For a poster scanned from 3 metres, make it at least 30 cm wide." } },
+        { "@type": "Question", "name": "Does the QR code expire?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Static QR codes never expire. They encode the data itself, not a link to a server that might be shut down." } },
+        { "@type": "Question", "name": "Is my data sent to a server?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. The QR code is generated entirely in your browser. The text, URL or vCard you type is never uploaded, logged or stored." } }
+      ]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="fixed-navbar-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Primary">
+      <div class="navbar-inner">
+        <a href="/" class="logo"><span class="logo-mark"><i class="fas fa-calculator"></i></span><span class="logo-text">Tools<em>.land</em></span></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#calculators">Calculators</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <div class="nav-actions"><a href="/#calculators" class="btn-nav-primary"><i class="fas fa-arrow-left"></i>&nbsp;All Calculators</a></div>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="page-wrapper">
+    <nav class="breadcrumb--page" aria-label="Breadcrumb">
+      <a href="/">Tools</a><span aria-hidden="true">/</span><span class="current">QR Code Generator</span>
+    </nav>
+
+    <section class="hero hero--tool">
+      <div class="hero-badge"><i class="fas fa-qrcode"></i> PNG &amp; SVG · Offline · Private</div>
+      <h1>QR Code <em>Generator</em></h1>
+      <p>
+        Create QR codes for URLs, text, Wi-Fi, email, SMS and vCards.
+        Download as PNG or SVG. Everything is generated in your browser —
+        nothing is uploaded.
+      </p>
+    </section>
+
+    <!-- ══════════════ GENERATOR ══════════════ -->
+    <section class="tool-wrap tool-wrap--wide">
+      <div class="tool-card tool-card--flagship" data-tool="qr">
+
+        <!-- Mode tabs -->
+        <div class="tool-tabs tool-tabs--scroll" role="tablist" aria-label="QR code content type">
+          <button class="tool-tab active" role="tab" aria-selected="true" data-mode="text">
+            <i class="fas fa-font"></i><span>Text / URL</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="wifi">
+            <i class="fas fa-wifi"></i><span>Wi-Fi</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="vcard">
+            <i class="fas fa-address-card"></i><span>Contact</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="email">
+            <i class="fas fa-envelope"></i><span>Email</span>
+          </button>
+          <button class="tool-tab" role="tab" aria-selected="false" data-mode="sms">
+            <i class="fas fa-comment-sms"></i><span>SMS</span>
+          </button>
+        </div>
+
+        <!-- ── Panel: Text / URL ── -->
+        <div class="tool-panel" data-panel="text">
+          <label class="tool-field">
+            <span class="tool-field__label">Text or URL</span>
+            <span class="tool-field__inputwrap">
+              <textarea id="qrText" class="qr-textarea" rows="3" placeholder="https://tools.land.me.uk/ or any text…" spellcheck="false"></textarea>
+            </span>
+          </label>
+        </div>
+
+        <!-- ── Panel: Wi-Fi ── -->
+        <div class="tool-panel hidden" data-panel="wifi">
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Network name (SSID)</span>
+              <span class="tool-field__inputwrap">
+                <input type="text" id="qrWifiSsid" placeholder="MyHomeWiFi" autocomplete="off" />
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Password</span>
+              <span class="tool-field__inputwrap">
+                <input type="text" id="qrWifiPass" placeholder="••••••••" autocomplete="off" />
+              </span>
+            </label>
+          </div>
+          <div class="tool-inputs" style="margin-top: var(--sp-2);">
+            <label class="tool-field">
+              <span class="tool-field__label">Security</span>
+              <span class="tool-field__inputwrap">
+                <select id="qrWifiEnc">
+                  <option value="WPA">WPA / WPA2 / WPA3 (most common)</option>
+                  <option value="WEP">WEP (old)</option>
+                  <option value="nopass">Open (no password)</option>
+                </select>
+              </span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Hidden network</span>
+              <span class="tool-field__inputwrap" style="padding: 0.9rem 1rem;">
+                <label class="pw-checkbox" style="margin: 0;">
+                  <input type="checkbox" id="qrWifiHidden" />
+                  <span class="pw-checkbox__box"></span>
+                  <span class="pw-checkbox__label">Yes, the network is hidden</span>
+                </label>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ── Panel: Contact ── -->
+        <div class="tool-panel hidden" data-panel="vcard">
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">First name</span>
+              <span class="tool-field__inputwrap"><input type="text" id="qrVcFirst" placeholder="Alex" autocomplete="off" /></span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Last name</span>
+              <span class="tool-field__inputwrap"><input type="text" id="qrVcLast" placeholder="Smith" autocomplete="off" /></span>
+            </label>
+          </div>
+          <div class="tool-inputs" style="margin-top: var(--sp-2);">
+            <label class="tool-field">
+              <span class="tool-field__label">Phone</span>
+              <span class="tool-field__inputwrap"><input type="tel" id="qrVcPhone" placeholder="+44 7700 900000" autocomplete="off" /></span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Email</span>
+              <span class="tool-field__inputwrap"><input type="email" id="qrVcEmail" placeholder="alex@example.com" autocomplete="off" /></span>
+            </label>
+          </div>
+          <div class="tool-inputs" style="margin-top: var(--sp-2);">
+            <label class="tool-field">
+              <span class="tool-field__label">Organisation <em>(optional)</em></span>
+              <span class="tool-field__inputwrap"><input type="text" id="qrVcOrg" placeholder="Acme Ltd" autocomplete="off" /></span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Website <em>(optional)</em></span>
+              <span class="tool-field__inputwrap"><input type="url" id="qrVcUrl" placeholder="https://example.com" autocomplete="off" /></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ── Panel: Email ── -->
+        <div class="tool-panel hidden" data-panel="email">
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">To</span>
+              <span class="tool-field__inputwrap"><input type="email" id="qrEmailTo" placeholder="hello@example.com" autocomplete="off" /></span>
+            </label>
+            <label class="tool-field">
+              <span class="tool-field__label">Subject <em>(optional)</em></span>
+              <span class="tool-field__inputwrap"><input type="text" id="qrEmailSubject" placeholder="Hello" autocomplete="off" /></span>
+            </label>
+          </div>
+          <label class="tool-field" style="margin-top: var(--sp-2);">
+            <span class="tool-field__label">Body <em>(optional)</em></span>
+            <span class="tool-field__inputwrap"><textarea id="qrEmailBody" class="qr-textarea" rows="3" placeholder="Message…" spellcheck="false"></textarea></span>
+          </label>
+        </div>
+
+        <!-- ── Panel: SMS ── -->
+        <div class="tool-panel hidden" data-panel="sms">
+          <div class="tool-inputs">
+            <label class="tool-field">
+              <span class="tool-field__label">Phone number</span>
+              <span class="tool-field__inputwrap"><input type="tel" id="qrSmsTo" placeholder="+44 7700 900000" autocomplete="off" /></span>
+            </label>
+          </div>
+          <label class="tool-field" style="margin-top: var(--sp-2);">
+            <span class="tool-field__label">Message <em>(optional)</em></span>
+            <span class="tool-field__inputwrap"><textarea id="qrSmsBody" class="qr-textarea" rows="3" placeholder="Text to pre-fill…" spellcheck="false"></textarea></span>
+          </label>
+        </div>
+
+        <!-- ── Preview ── -->
+        <div class="qr-preview" data-qr-preview>
+          <div class="qr-preview__frame" id="qrPreviewFrame">
+            <div class="qr-preview__placeholder" id="qrPlaceholder">
+              <i class="fas fa-qrcode"></i>
+              <p>Your QR code will appear here.</p>
+            </div>
+            <canvas id="qrCanvas" width="320" height="320" aria-label="QR code preview"></canvas>
+          </div>
+          <p class="qr-preview__encoding" id="qrEncoding"></p>
+        </div>
+
+        <!-- ── Options ── -->
+        <details class="pw-advanced qr-options">
+          <summary>Customise appearance</summary>
+          <div class="qr-options__body">
+
+            <div class="qr-option-row">
+              <label for="qrSize" class="tool-field__label">Size</label>
+              <span class="pw-length-badge" id="qrSizeLabel">320</span>
+            </div>
+            <input type="range" id="qrSize" min="128" max="1024" step="32" value="320" class="pw-slider" />
+
+            <div class="qr-option-grid">
+              <label class="tool-field">
+                <span class="tool-field__label">Foreground</span>
+                <span class="tool-field__inputwrap qr-color-wrap">
+                  <input type="color" id="qrFg" value="#0f172a" />
+                  <input type="text" id="qrFgHex" value="#0f172a" maxlength="7" class="qr-color-hex" />
+                </span>
+              </label>
+              <label class="tool-field">
+                <span class="tool-field__label">Background</span>
+                <span class="tool-field__inputwrap qr-color-wrap">
+                  <input type="color" id="qrBg" value="#ffffff" />
+                  <input type="text" id="qrBgHex" value="#ffffff" maxlength="7" class="qr-color-hex" />
+                </span>
+              </label>
+            </div>
+
+            <label class="tool-field" style="margin-top: var(--sp-2);">
+              <span class="tool-field__label">Error correction</span>
+              <span class="tool-field__inputwrap">
+                <select id="qrEcl">
+                  <option value="L">L — Low (7% recovery)</option>
+                  <option value="M" selected>M — Medium (15% recovery) — recommended</option>
+                  <option value="Q">Q — Quartile (25% recovery)</option>
+                  <option value="H">H — High (30% recovery) — best for print</option>
+                </select>
+              </span>
+            </label>
+
+            <label class="pw-checkbox" style="margin-top: var(--sp-2);">
+              <input type="checkbox" id="qrQuiet" checked />
+              <span class="pw-checkbox__box"></span>
+              <span class="pw-checkbox__label">Include quiet zone (4-module margin)</span>
+            </label>
+
+          </div>
+        </details>
+
+        <!-- ── Actions ── -->
+        <div class="tool-actions tool-actions--rich">
+          <button class="tool-btn tool-btn--primary" data-action="download-png" type="button">
+            <i class="fas fa-download"></i><span>Download PNG</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="download-svg" type="button">
+            <i class="fas fa-file-code"></i><span>Download SVG</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost" data-action="copy-image" type="button">
+            <i class="fas fa-image"></i><span>Copy image</span>
+          </button>
+          <button class="tool-btn tool-btn--ghost tool-btn--danger" data-action="reset" type="button">
+            <i class="fas fa-rotate-left"></i><span>Reset</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ HOW IT WORKS ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">How It Works</span>
+        <h2 class="content-title">QR Codes <em>Explained</em></h2>
+      </header>
+      <div class="prose">
+        <h3>What is a QR code?</h3>
+        <p>A QR code (Quick Response code) is a two-dimensional barcode that stores data in a grid of black and white squares. A scanner reads the pattern and reconstructs the original data — text, a URL, contact details, a Wi-Fi password, or anything else that fits.</p>
+
+        <h3>Static vs dynamic QR codes</h3>
+        <p>This generator creates <strong>static</strong> QR codes. The data is encoded directly into the pattern. There is no server, no redirect and no expiry — the QR code works forever as long as the data it encodes is still valid.</p>
+        <p>Dynamic QR codes (used by some commercial services) encode a short URL that redirects to your real destination. The redirect can be changed later, but the QR code stops working if the service shuts down. For most uses, static is better.</p>
+
+        <h3>Error correction</h3>
+        <p>QR codes include redundant data so they can still be read if part of the pattern is damaged. There are four levels:</p>
+        <ul>
+          <li><strong>L (Low)</strong> — 7% of the code can be damaged and it will still scan.</li>
+          <li><strong>M (Medium)</strong> — 15%. A good default for most uses.</li>
+          <li><strong>Q (Quartile)</strong> — 25%. Better tolerance for dirty or damaged prints.</li>
+          <li><strong>H (High)</strong> — 30%. Best for logos, tiny prints, or outdoor use.</li>
+        </ul>
+        <p>Higher error correction makes the QR code denser (more modules), so the code has to be larger to scan from the same distance.</p>
+
+        <h3>Sizing for print</h3>
+        <p>A common rule of thumb: the printed QR code should be at least one tenth the scanning distance. For scanning from 30 cm, make the code at least 3 cm wide. For a poster scanned from 3 metres, make it at least 30 cm wide. Increase the size further if the error correction is low or the content is long.</p>
+
+        <h3>Quiet zone</h3>
+        <p>QR codes need a margin — a "quiet zone" — around them so scanners can distinguish the code from its surroundings. The standard is 4 modules wide. Keep this option on unless you have a specific reason to remove it.</p>
+
+        <h3>Colours</h3>
+        <p>Dark modules on a light background scan most reliably. If you customise the colours, keep high contrast between foreground and background and avoid inverting (light modules on a dark background) — some scanners handle inversion, many do not.</p>
+
+        <h3>Offline</h3>
+        <p>This page works completely offline after the first load. The QR encoding library is bundled locally and no data is ever sent to a server.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ USES ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Everyday Uses</span>
+        <h2 class="content-title">When You'll <em>Need This</em></h2>
+      </header>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="info-card__icon"><i class="fas fa-link"></i></div>
+          <h3>Website links</h3>
+          <p>Print a QR code on a business card, poster or menu so people can open your site in one scan.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon green"><i class="fas fa-wifi"></i></div>
+          <h3>Guest Wi-Fi</h3>
+          <p>Let visitors join your Wi-Fi without typing a long password. Print the code on a card or post it on the wall.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon purple"><i class="fas fa-address-card"></i></div>
+          <h3>Digital business cards</h3>
+          <p>Encode your contact details as a vCard. Scanning adds you directly to someone's phone contacts.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-utensils"></i></div>
+          <h3>Restaurant menus</h3>
+          <p>Link to a PDF or web menu instead of printing new ones. Change the destination without reprinting.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon red"><i class="fas fa-ticket"></i></div>
+          <h3>Event tickets</h3>
+          <p>Each ticket gets a unique QR code that can be scanned at the door — no special equipment needed.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-card__icon yellow"><i class="fas fa-truck-fast"></i></div>
+          <h3>Packaging &amp; tracking</h3>
+          <p>Link to tracking pages, product information, or an instructional video directly from the box.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════════ FAQ ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Questions</span>
+        <h2 class="content-title">QR Code <em>FAQ</em></h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-row">
+          <summary>Are the QR codes permanent?</summary>
+          <div class="faq-row__answer"><p>Yes. This generator encodes your data directly into the image. The QR code is a static, self-contained image and does not rely on any server or redirect. It will keep working as long as the data it encodes remains valid.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>What error correction level should I use?</summary>
+          <div class="faq-row__answer"><p><strong>M (15%)</strong> is a good default. Use <strong>H (30%)</strong> if you plan to print at small sizes, print on uneven surfaces, or overlay a logo. Higher levels make the QR code denser but more tolerant of damage.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Can I use QR codes commercially?</summary>
+          <div class="faq-row__answer"><p>Yes. QR codes are an open standard (ISO/IEC 18004). The codes you generate here are yours to use freely, including for commercial purposes.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>How big should the printed QR code be?</summary>
+          <div class="faq-row__answer"><p>A common rule of thumb: the QR code should be at least one tenth the scanning distance. For scanning from 30 cm, make it at least 3 cm wide. For a poster scanned from 3 metres, make it at least 30 cm wide.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Does the QR code expire?</summary>
+          <div class="faq-row__answer"><p>No. Static QR codes never expire. They encode the data itself, not a link to a server that might be shut down.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Is my data sent to a server?</summary>
+          <div class="faq-row__answer"><p>No. The QR code is generated entirely in your browser. The text, URL or vCard you type is never uploaded, logged or stored.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Why does the QR code get denser with more text?</summary>
+          <div class="faq-row__answer"><p>QR codes have a fixed number of modules per version. More data needs more modules, so the code becomes denser. Longer URLs or vCards produce visibly busier QR codes. Keep data short where possible — short URLs scan faster and more reliably.</p></div>
+        </details>
+        <details class="faq-row">
+          <summary>Can I add a logo in the middle?</summary>
+          <div class="faq-row__answer"><p>Not in this generator. Logos usually require error correction level H (30%) so the code still scans when part of the pattern is covered. If you add a logo with an external tool, generate the QR code here at level H, then overlay the logo carefully — the code will tolerate up to 30% coverage.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-slot" aria-hidden="true"></div>
+
+    <!-- ══════════════ RELATED ══════════════ -->
+    <section class="content-section">
+      <header class="content-header">
+        <span class="content-eyebrow">Related Tools</span>
+        <h2 class="content-title">You Might Also <em>Need</em></h2>
+      </header>
+
+      <div class="similar-grid">
+        <a href="/password-generator" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-shield-halved"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Password Generator</span>
+            <span class="similar-meta">Strong passwords and passphrases</span>
+          </span>
+        </a>
+        <a href="/case-converter" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-font"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Case Converter</span>
+            <span class="similar-meta">13 case styles at once</span>
+          </span>
+        </a>
+        <a href="/unit-converter" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-ruler-combined"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">Unit Converter</span>
+            <span class="similar-meta">Length, weight, temperature</span>
+          </span>
+        </a>
+        <a href="/" class="similar-card">
+          <span class="similar-logo"><i class="fas fa-calculator"></i></span>
+          <span class="similar-body">
+            <span class="similar-name">All Calculators</span>
+            <span class="similar-meta">Back to hub</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <p class="last-updated">
+      <i class="fas fa-circle-check"></i>
+      Last updated: <time datetime="2026-01-01">1 January 2026</time>.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tools — part of the <a href="https://land.me.uk/">land.me.uk</a> hub.</p>
+    <p>
+      <a href="/about.html">About</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/legal.html">Privacy</a> ·
+      <a href="/legal.html">Terms</a> ·
+      <a href="https://land.me.uk/">Hub</a>
+    </p>
+  </footer>
+
+  <script type="module" src="/js/canvas-bg.js"></script>
+  <script type="module" src="/js/calculator-page.js"></script>
+</body>
+</html>
